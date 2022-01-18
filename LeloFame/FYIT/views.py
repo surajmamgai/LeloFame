@@ -10,20 +10,18 @@ from django.contrib.auth import authenticate, login, logout
 def index(request):
     return render(request,"index.html")
 
-
-
-
 #login
 def signup(request):
     if request.method=="POST":
         id = utils.generateuser()
-        name = request.POST.get('name')
+        first_name = request.POST.get('firstname')
+        last_name = request.POST.get('lastname')
         email = request.POST.get('email')
         password = request.POST.get('password')
-        obj =Profile(id = id, name = name, email_id = email,password = password, credits = 0)
+        obj =Profile(id = id, first_name=first_name, last_name=last_name, email = email,password = password, credits = 0)
         obj.save()
-        render(request,"login.html")
-    render(request,"login.html")
+        return render(request,"login.html")
+    return render(request,"login.html")
 
 
 #login
@@ -46,8 +44,3 @@ def login(request):
 def logout(request):
     logout(request)
     return redirect('login')
-
-
-    
-
-
