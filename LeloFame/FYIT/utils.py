@@ -8,3 +8,11 @@ def generateuser():
     else:
         return r
     u = generateuser()
+
+def left_credit(user,to_deduct):
+    obj = Profile.objects.get(id=user)
+    total = obj.credit
+    if(total>=to_deduct):
+        return total-to_deduct
+    else:
+        return -1

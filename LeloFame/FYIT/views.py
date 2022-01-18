@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from FYIT import utils
-from .models import Profile
+from .models import Profile, CreditLog
 from django.contrib.auth import authenticate, login, logout
 # Create your views here.
 
@@ -12,7 +12,6 @@ def index(request):
 
 def dashboard(request):
     return render(request,"dashboard.html")
-    
     
 
 #login
@@ -50,3 +49,22 @@ def logout(request):
     logout(request)
     return redirect('login')
 
+
+#credit log
+
+def credit_view(request):
+    if request.method=='POST':
+        id = request.user.username
+        id = Profile.objects.get(id=id)
+        credit_spend = request.POST.get('credit_spend')
+        platform = request.POST.get('platform')
+        type = request.POST.get('type')
+        user_id = request.POST.get('user_id')
+        flag = utils.left_credit(request.user.username,credit_spend)
+        if flag==-1:
+            return render(request,'dashboard.html',{'mess':"Not enough amount"})
+        else:
+            obj = CreditLog(idd=id,credit_spend=credit_spend,platform=platform,type=type,user_id=user_id,credit_left=flag)
+            obj.save()
+        return redirect('/dashboard')
+    return redirect('/dashboard')

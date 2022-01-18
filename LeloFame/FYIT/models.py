@@ -55,7 +55,7 @@ class CreditPurchaseLog(models.Model):
     credit_new_balance = models.IntegerField()
     credit_value = models.IntegerField()                         # how much is purchased
     amount = models.IntegerField()                               #price of credits
-    date = models.DateTimeField()                                #date of purchase
+    date = models.DateTimeField(default=timezone.now())          #date of purchase
 
 
 class LeloFameRequest(models.Model):
