@@ -15,26 +15,7 @@
 <body>
     <body>
         <script src="https://kit.fontawesome.com/ab00d86059.js" crossorigin="anonymous"></script>
-        <script>
-          const inputs = document.querySelectorAll('.input');
-
-function focusFunc(){
-    let parent = this.parentNode.parentNode;
-    parent.classList.add('focus');
-}
-
-function blurFunc(){
-    let parent = this.parentNode.parentNode;
-    if(this.value == ""){
-        parent.classList.remove('focus');
-    }
-}
-
-inputs.forEach(input => {
-    input.addEventListener('focus', focusFunc);
-    input.addEventListener('blur', blurFunc);
-});
-        </script>
+       
           <img class="wave" src="https://raw.githubusercontent.com/Jhonierpc/WebDevelopment/master/Login%20Responsive/img/wave.png" alt="">
           <div class="container">
                <div class="img">
@@ -89,12 +70,14 @@ inputs.forEach(input => {
                         </div>
                         <div>
                             <!-- <h5>Confirm Password</h5> -->
-                            <input class="input" placeholder="Confirm Password"  type="password" required>
+                            <input class="input" placeholder="Confirm Password"  type="password" name='confirmpassword' required>
                         </div>
                     </div>
                     <a href="login">Already Have a Account</a>
+                    <div class="alert alert-warning" role="alert">
+                       {{p}}
+                      </div>
                       <button class="btn" type="submit"> Sign Up</button>
-                      <!-- <input class="btn" type="submit" value="Login"> -->
                   </form>
               </div>
           </div>

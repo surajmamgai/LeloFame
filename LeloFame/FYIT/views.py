@@ -20,7 +20,15 @@ def signup(request):
         last_name = request.POST.get('lastname')
         email = request.POST.get('email')
         password = request.POST.get('password')
+
         obj =Profile.objects.create_user(username = id, first_name=first_name, last_name=last_name, email = email,password = password, credits = 0)
+
+        password1 = request.POST.ge('confirmpassword')
+        if(password1!=password):
+            p = "Password and Confirm Password doesn't matched!"
+            return render(request,"signup.html",{p})
+
+        obj =Profile(id = id, first_name=first_name, last_name=last_name, email = email,password = password, credits = 0)
         obj.save()
         return render(request,"login.html")
     return render(request,"signup.html")
