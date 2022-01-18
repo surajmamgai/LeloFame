@@ -3,10 +3,13 @@ from unittest.util import _MAX_LENGTH
 from django.db import models
 from django.contrib.auth.models import AbstractUser, PermissionsMixin, BaseUserManager
 from numpy import ma
-class Profile(AbstractUser, PermissionsMixin):
+
+class Profile(AbstractUser):
+    first_name = models.CharField(max_length=50)
+    last_name = models.CharField(max_length=50)
     id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=255)
-    email_id = models.EmailField(max_length = 254)
+    email = models.EmailField(max_length = 254)
     password = models.CharField(max_length=100)
     credits =  models.IntegerField(default=0)
 

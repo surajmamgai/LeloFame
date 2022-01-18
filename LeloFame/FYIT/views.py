@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from LeloFame.FYIT.utils import generateuser
+from FYIT import utils
 from .models import Profile
 from django.contrib.auth import authenticate, login, logout
 # Create your views here.
@@ -16,7 +16,7 @@ def index(request):
 #login
 def signup(request):
     if request.method=="POST":
-        id = generateuser()
+        id = utils.generateuser()
         name = request.POST.get('name')
         email = request.POST.get('email')
         password = request.POST.get('password')
