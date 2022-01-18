@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'FYIT',
 ]
 
 MIDDLEWARE = [
@@ -69,7 +70,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'LeloFame.wsgi.application'
 
-
+AUTH_USER_MODEL = "FYIT.Profile"
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
