@@ -10,6 +10,11 @@ from django.contrib.auth import authenticate, login, logout
 def index(request):
     return render(request,"index.html")
 
+def dashboard(request):
+    return render(request,"dashboard.html")
+    
+    
+
 #login
 def signup(request):
     if request.method=="POST":
@@ -44,3 +49,4 @@ def login(request):
 def logout(request):
     logout(request)
     return redirect('login')
+
