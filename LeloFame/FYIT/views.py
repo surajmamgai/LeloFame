@@ -32,8 +32,6 @@ def signup(request):
         obj.save()
         return render(request,"login.html")
     return render(request,"signup.html")
-
-
 #login
 def login(request):
     if request.user.is_authenticated:
@@ -51,6 +49,7 @@ def login(request):
         else:
             return HttpResponse('please enter valid detail')
     return render(request,'login.html')
+
 
 
 #logout
