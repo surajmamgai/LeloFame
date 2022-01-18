@@ -25,7 +25,7 @@ def signup(request):
         obj =Profile(id = id, first_name=first_name, last_name=last_name, email = email,password = password, credits = 0)
         obj.save()
         return render(request,"login.html")
-    return render(request,"login.html")
+    return render(request,"signup.html")
 
 
 #login
@@ -40,8 +40,9 @@ def login(request):
             login(request,user)
             return redirect('index')
     else:
+
         return render(request,'login.html')
-    return render(request,'login.html')
+    return HttpResponse('please enter valid detail')
 
 
 #logout

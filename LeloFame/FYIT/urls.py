@@ -4,5 +4,7 @@ from FYIT import views
 
 urlpatterns = [ 
     path('',views.index),
-    path('dashboard/',views.dashboard)
+    path('dashboard/',views.dashboard),
+    path('login', views.login),
+    path('signup',views.signup)
 ]
