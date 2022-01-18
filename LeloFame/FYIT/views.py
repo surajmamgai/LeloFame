@@ -31,8 +31,6 @@ def signup(request):
         obj.save()
         return render(request,"login.html")
     return render(request,"signup.html")
-
-
 #login
 def login(request):
     if request.user.is_authenticated:
@@ -45,7 +43,6 @@ def login(request):
             login(request,user)
             return redirect('index')
     else:
-
         return render(request,'login.html')
     return HttpResponse('please enter valid detail')
 
