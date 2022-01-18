@@ -68,3 +68,13 @@ def credit_view(request):
             obj.save()
         return redirect('/dashboard')
     return redirect('/dashboard')
+
+def mail(request):
+    if request.method=='POST':
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        subject = request.POST.get('subject')
+        message = request.POST.get('message')
+        utils.send_mail_function(name,email,subject,message)
+        return redirect('/')
+    return redirect('/')
