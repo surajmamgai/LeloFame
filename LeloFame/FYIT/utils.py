@@ -9,7 +9,7 @@ def generateuser():
     if u > 0:
         generateuser()
     else:
-        return r
+        return str(r)
     u = generateuser()
 
 def left_credit(user,to_deduct):
