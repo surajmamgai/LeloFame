@@ -27,8 +27,6 @@ def signup(request):
         if(password1!=password):
             p = "Password and Confirm Password doesn't matched!"
             return render(request,"signup.html",{p})
-
-        obj =Profile(id = id, first_name=first_name, last_name=last_name, email = email,password = password, credits = 0)
         obj.save()
         return render(request,"login.html")
     return render(request,"signup.html")
