@@ -15,35 +15,38 @@ def dashboard(request):
 #login
 def signup(request):
     if request.method=="POST":
-        id = str(utils.generateuser())
+        id = (utils.generateuser())
         first_name = request.POST.get('firstname')
         last_name = request.POST.get('lastname')
         email = request.POST.get('email')
         password = request.POST.get('password')
 
         obj =Profile.objects.create_user(username = id, first_name=first_name, last_name=last_name, email = email,password = password, credits = 0)
-
-        password1 = request.POST.ge('confirmpassword')
+        password1 = request.POST.get('confirmpassword')
         if(password1!=password):
             p = "Password and Confirm Password doesn't matched!"
+            return render(request,"signup.html",{'p':p})
+
+        # obj =Profile(id = id, first_name=first_name, last_name=last_name, email = email,password = password, credits = 0)
             return render(request,"signup.html",{p})
+
         obj.save()
         return render(request,"login.html")
     return render(request,"signup.html")
 #login
-def login(request):
+def loginn(request):
     if request.user.is_authenticated:
-        return redirect('index')
+        return redirect('dashboard/')
     if request.method=="POST":
         username = request.POST.get('id')
         password = request.POST.get('password')
         print(username,password)
-        user = authenticate(username=id, password=password)
+        user = authenticate(request,username=username, password=password)
         obj = Profile.objects.filter(username=username,password=password).count()
         print(obj)
         if user is not None:
             login(request,user)
-            return redirect('index')
+            return redirect('dashboard/')
         else:
             return HttpResponse('please enter valid detail')
     return render(request,'login.html')
@@ -51,7 +54,7 @@ def login(request):
 
 
 #logout
-def logout(request):
+def logoutt(request):
     logout(request)
     return redirect('login')
 
