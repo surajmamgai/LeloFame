@@ -28,11 +28,11 @@ def signup(request):
             return render(request,"signup.html",{'p':p})
 
         # obj =Profile(id = id, first_name=first_name, last_name=last_name, email = email,password = password, credits = 0)
+            return render(request,"signup.html",{p})
+
         obj.save()
         return render(request,"login.html")
     return render(request,"signup.html")
-
-
 #login
 def loginn(request):
     if request.user.is_authenticated:
@@ -50,6 +50,7 @@ def loginn(request):
         else:
             return HttpResponse('please enter valid detail')
     return render(request,'login.html')
+
 
 
 #logout

@@ -53,7 +53,7 @@ form h2{
     font-size: 2.9rem;
     text-transform: uppercase;
     margin: 15px 0;
-    color: #037971;
+    color: #4AA3DF;
 }
 
 .input-div{
@@ -62,7 +62,7 @@ form h2{
     grid-template-columns: 7% 93%;
     margin: 25px 0;
     padding: 5px;
-    border-bottom: 2px solid #037971;
+    border-bottom: 2px solid #4AA3DF;
 }
 
 .input-div:after, .input-div:before{
@@ -112,7 +112,7 @@ form h2{
 }
 
 .i i{
-    color: #037971;
+    color: #4AA3DF;
     transition: .3s;
 }
 
@@ -121,7 +121,7 @@ form h2{
     height: 45px;
 }
 ::placeholder{
-    position: absolute;
+     position: absolute;
     left: 10px;
     top: 50%;
     transform: translateY(-50%);
@@ -165,7 +165,7 @@ a{
 }
 
 a:hover{
-    color: #037971;
+    color: #4AA3DF;
 }
 
 .btn{
@@ -177,7 +177,7 @@ a:hover{
     font-size: 1.2rem;
     outline: none;
     border: none;
-    background-image: linear-gradient(to right, #32be8f, #38d39f, #32be8f);
+    background-image: linear-gradient(to right, #4AA3DF, #4AA3DF, #4AA3DF);
     cursor: pointer;
     color: #fff;
     text-transform: uppercase;
