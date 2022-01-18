@@ -3,6 +3,7 @@ from unittest.util import _MAX_LENGTH
 from django.db import models
 from django.contrib.auth.models import AbstractUser, PermissionsMixin, BaseUserManager
 from numpy import ma
+from django.utils import timezone
 
 class Profile(AbstractUser):
     first_name = models.CharField(max_length=50)
@@ -36,8 +37,6 @@ class Profile(AbstractUser):
         obj = Profile.objects.get(id=a)
         n = obj.email_id
         return n
-
-
     
 
 class CreditLog(models.Model):
@@ -47,8 +46,7 @@ class CreditLog(models.Model):
     type = models.CharField(max_length=200)                      #like or share or subscribe or followers etc.
     userid = models.CharField(max_length=200)                    # user id of the platform
     credit_left = models.IntegerField()
-    date = models.DateTimeField()
-
+    date = models.DateTimeField(default = timezone.now())
 
 
 class CreditPurchaseLog(models.Model):
@@ -57,7 +55,7 @@ class CreditPurchaseLog(models.Model):
     credit_new_balance = models.IntegerField()
     credit_value = models.IntegerField()                         # how much is purchased
     amount = models.IntegerField()                               #price of credits
-    date = models.DateTimeField()                                #date of purchase
+    date = models.DateTimeField(default=timezone.now())          #date of purchase
 
 
 class LeloFameRequest(models.Model):
@@ -66,13 +64,3 @@ class LeloFameRequest(models.Model):
     platform = models.CharField(max_length=200)                 # platform like instagram 
     type = models.CharField(max_length=200)                     # like followers etc
     request = models.CharField(max_length=300)                  # package the user selected
-
-
-
-
-
-
-
-
-
-
