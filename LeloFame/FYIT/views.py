@@ -1,17 +1,14 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from FYIT import utils
-from .models import Profile, CreditLog
+from .models import *
 from django.contrib.auth import authenticate, login, logout
-# Create your views here.
 
-#homepage
 def index(request):
     return render(request,"index.html")
 
 def dashboard(request):
     return render(request,"dashboard.html")
-    
 #login
 def signup(request):
     if request.method=="POST":
@@ -84,3 +81,26 @@ def mail(request):
         utils.send_mail_function(name,email,subject,message)
         return redirect('/')
     return redirect('/')
+mp = {100: 50, 200: 110, 300:150}
+
+def lelofamerequest(request):
+    user = request.user.username
+    if request.method == 'POST':
+        userhandle = request.POST.get('userhandle')
+        platform = request.POST.get('platform')
+        type = request.POST.get('type')
+        req_type=request.POST.get('request')
+        obj = LeloFameRequest(username = user, userusername=userhandle, platform = platform , type = type, request = req_type)
+        obj.save()
+        return redirect('dashboard')
+    return redirect('dashboard')
+
+def creditpurchase(request):
+    user = request.user.username
+    if request.method == 'POST':
+        paymentslip = request.FILES.get('paymentslip')
+        
+
+
+
+

@@ -6,6 +6,8 @@ from django.contrib.auth.models import AbstractUser, PermissionsMixin, BaseUserM
 from numpy import ma
 from django.utils import timezone
 
+
+
 class Profile(AbstractUser):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
@@ -62,10 +64,17 @@ class CreditPurchaseLog(models.Model):
     amount = models.IntegerField()                               #price of credits
     date = models.DateTimeField(default=timezone.now)          #date of purchase
 
+class CreditPurchaseRequest(models.Model):
+    username = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    paymentslip = models.FileField(upload_to='paymentslip/',null=True)
+    status = models.BooleanField(default=False)
+
+
+
 
 class LeloFameRequest(models.Model):
     username = models.ForeignKey(Profile, on_delete=models.CASCADE)
-    userusername = models.CharField(max_length=200)                   # platform user username like instagram username facebookusername etc
+    userusername = models.CharField(max_length=200)              # platform user username like instagram username facebookusername etc
     platform = models.CharField(max_length=200)                 # platform like instagram 
     type = models.CharField(max_length=200)                     # like followers etc
     request = models.CharField(max_length=300)                  # package the user selected
