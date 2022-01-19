@@ -1,0 +1,94 @@
+.lend_context 
+{
+    border-radius: 20px;
+    padding: 30px 30px;
+    background: #F8F8F8;
+    margin: 30px auto;
+    border: 1px solid rgba(255,255,255,.2);
+    width: 80%;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.lend_context_top{
+    width: 100%;
+}
+.lend_text
+{
+    font-size: 3em;
+    font-family: "Arial Black";
+    padding-bottom: 24px;
+    margin-bottom: 24px;
+    width: 100%;
+
+    display: flex;
+    color: #01A1FE;
+    align-items: center;
+    text-align: center;
+    font-weight: bold;
+}
+.lend_span{
+    width: 100%;
+    height: 4px;
+    display: block;
+  background: linear-gradient(
+        90deg, rgba(212, 17, 102, 0.8) 0%, rgba(15, 77, 236, 0.8) 100%);
+}
+.lend_main_containerr{
+    width: 100%;
+    line-height:30px ;
+    display: flex;
+    border-bottom: 2px solid rgba(255,255,255,.1);
+    margin: auto;
+}
+.lend_main_containerr1{
+    width: 100%;
+    font-weight: bolder;
+    
+    margin: auto;
+    display: flex;
+margin-bottom: 20px;
+}
+.lend_row{
+    align-items: center;
+    display: inline-block;
+    height: auto;
+    width:25%;
+    font-size: 2.5vmin;
+    justify-content: space-between;
+    padding: 0.5em 2em;
+    text-align: left;
+    margin: 2px;
+}
+.lend_main_containerr>.lend_row{
+    color: #837777;
+    font-weight: bold;
+}
+.lend_main_containerr1>.lend_row{
+    color: black;
+}
+
+.btn{
+    display: block;
+    width: 60%;
+    height: 100%;
+    border-radius: 12px;
+    /* margin: 1rem 0; */
+    font-size: 2.5vmin;
+    outline: none;
+    border: none;
+    background-image: linear-gradient(to right, #4FD8FE, #4FD8FE, #4FD8FE);
+    cursor: pointer;
+    color: #fff;
+    text-transform: uppercase;
+    font-family: 'Poppins', sans-serif;
+    background-size: 200%;
+    transition: .5s;
+}
+
+.btn:hover{
+    background-position: right;
+}
+.lend_apy{
+    background: linear-gradient(90deg, rgba(209, 23, 231, 1) 0%, rgba(50, 102, 211, 1) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
