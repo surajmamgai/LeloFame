@@ -26,13 +26,9 @@ def signup(request):
         if(password1!=password):
             p = "Password and Confirm Password doesn't matched!"
             return render(request,"signup.html",{'p':p})
-
-        # obj =Profile(id = id, first_name=first_name, last_name=last_name, email = email,password = password, credits = 0)
-            return render(request,"signup.html",{p})
-
         obj.save()
         return render(request,"login.html")
-    return render(request,"signup.html")
+    return render(request,"signup.html",{'p':''})
 #login
 def loginn(request):
     if request.user.is_authenticated:
@@ -40,16 +36,17 @@ def loginn(request):
     if request.method=="POST":
         username = request.POST.get('id')
         password = request.POST.get('password')
-        print(username,password)
+        # print(username,password)
         user = authenticate(request,username=username, password=password)
         obj = Profile.objects.filter(username=username,password=password).count()
-        print(obj)
+        # print(obj)
         if user is not None:
             login(request,user)
             return redirect('dashboard/')
         else:
-            return HttpResponse('please enter valid detail')
-    return render(request,'login.html')
+            p = "Please Enter the valid Credentials"
+            return render(request,"login.html",{'p':p})
+    return render(request,'login.html',{'p':''})
 
 
 
