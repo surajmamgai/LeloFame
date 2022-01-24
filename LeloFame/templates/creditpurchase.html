@@ -1,33 +1,84 @@
-<!DOCTYPE html>
-<html lang="en">
-    {% load static %}
+<html>
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'assets/css/creditpurchase.css' %}">
-    <title>Credit-Purchase || LeloFame</title>
+  <title>Credit Purchase || LeloFame</title>
+  {% load static %}
+  <link rel="stylesheet" type="text/css" href="{% static 'assets/css/creditpurchase.css' %}">
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans:Condensed" />
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,800' rel='stylesheet' type='text/css'>
+
+
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script src="{% static 'assets/js/creditpurchase.js' %}"></script>
+
 </head>
+
 <body>
-    <div class="lend_context ">
-        <div class="lend_context_top">
-          <h2 class="lend_text center">LeloFame Packages</h2>
-        </div>
-        <span class="lend_span mb-3"></span>
-        <div class="lend_main_containerr1">
-          <div class="lend_row ">Coins</div>
-          <div class="lend_row ">Discount</div>
-          <div class="lend_row  ">Price</div>
-          <div class="lend_row "> ---- </div>
-        </div>
-        <form action="">
-            <div class="lend_main_containerr1">
-                <div class="lend_row ">Coins</div>
-                <div class="lend_row ">Discount</div>
-                <div class="lend_row  ">Price</div>
-                <div class="lend_row ">  <button class="btn" type="submit"> Sign Up</button> </div>
-            </div>
-    </form>
+  <div id="container">
+    <div class="whole">
+      <div class="type">
+        <p>BASIC</p>
       </div>
+      <div class="plan">
+        <div class="header">
+          <span></span>299<sup>₹</sup>
+          <p class="month">250 Credits</p>
+        </div>
+        <div class="price">
+          <form action="/creditpurchase" method="post">
+            {% csrf_token %}
+            <input type="text" name="plan" value="basic" hidden>
+            <button type="submit">PURCHASE</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="whole">
+      <div class="type standard">
+        <p>PRIME</p>
+      </div>
+      <div class="plan">
+
+        <div class="header">
+          <span></span>499<sup>₹</sup>
+          <p class="month">500 Credits</p>
+        </div>
+
+
+        <div class="price">
+          <form action="/creditpurchase" method="post">
+            {% csrf_token %}
+            <input type="text" name="plan" value="prime" hidden>
+            <button type="submit">PURCHASE</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="whole ">
+      <div class="type ultimate ">
+        <p>Premium</p>
+      </div>
+      <div class="plan">
+
+        <div class="header">
+          <span></span>999<sup>₹</sup>
+          <p class="month">1200 Credits</p>
+        </div>
+        <div class="price">
+          <form action="/creditpurchase" method="post">
+            {% csrf_token %}
+            <input type="text" name="plan" value="Premium" hidden>
+            <button type="submit">PURCHASE</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
 </body>
+
 </html>

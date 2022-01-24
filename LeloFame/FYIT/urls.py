@@ -5,11 +5,11 @@ from FYIT import views
 urlpatterns = [ 
     path('',views.index),
     path('dashboard/',views.dashboard),
-    path('login', views.loginn),
+    path('login', views.loginn,name='login'),
     path('signup',views.signup),
-    path('temp',views.creditpurchase),
     path('contact_us',views.mail),
     path('lelofarmrequest', views.lelofamerequest),
+    path('logout',views.logoutt),
     # path('planrequest', views.planrequest),
     path('creditpurchase', views.creditpurchase),
 ]
