@@ -68,7 +68,7 @@ class CreditPurchaseRequest(models.Model):
 
 class LeloFameRequest(models.Model):
     username = models.ForeignKey(Profile, on_delete=models.CASCADE)
-    userusername = models.CharField(max_length=200)              # platform user username like instagram username facebookusername etc
+    userhandle = models.CharField(max_length=200)              # platform user username like instagram username facebook username etc
     platform = models.CharField(max_length=200)                 # platform like instagram 
     type = models.CharField(max_length=200)                     # like followers etc
     plan = models.CharField(max_length=300)                  # package the user selected

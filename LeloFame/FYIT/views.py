@@ -8,9 +8,16 @@ def index(request):
     return render(request,"index.html")
 
 def dashboard(request):
-    user = request.user.username
-    username = Profile.objects.get(username = user)
-    return render(request,"dashboard.html",{'username':username,'credits':username.credits})
+    username = request.user
+    if username.is_authenticated:
+        username=Profile.objects.get(username = username.username)
+        return render(request,"dashboard.html",{'username':username,'credits':username.credits})
+    else:
+        return redirect('login')
+
+
+def creditpurchases(request):
+    return redirect('creditpurchase')
 #login
 def signup(request):
     if request.method=="POST":
@@ -97,16 +104,19 @@ Price = {
 }
 def lelofamerequest(request):
     user = request.user.username
-    if user is None:
+    if not request.user.is_authenticated:
         return redirect('login')
     if request.method == 'POST':
+        print(request.POST)
         userhandle = request.POST.get('userhandle')
         platform = request.POST.get('platform')
         type = request.POST.get('type')
         plan=request.POST.get('plan')
+
         username = Profile.objects.get(username = user)
         # plan = LeloFamePlan[platform][type][plan]
-        obj=LeloFameRequest(username=username,userusername=userhandle,platform=platform,type=type,plan=plan)
+        obj=LeloFameRequest(userhandle=userhandle,platform=platform,type=type,plan=plan)
+        obj.username = username
         obj.save()       
         return redirect('dashboard/')
     return redirect('dashboard/')

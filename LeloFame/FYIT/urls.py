@@ -8,8 +8,9 @@ urlpatterns = [
     path('login', views.loginn,name='login'),
     path('signup',views.signup),
     path('contact_us',views.mail),
-    path('lelofarmrequest', views.lelofamerequest),
+    path('lelofamerequest', views.lelofamerequest),
     path('logout',views.logoutt),
+    path('creditpurchases',views.creditpurchases),
     # path('planrequest', views.planrequest),
-    path('creditpurchase', views.creditpurchase),
+    path('creditpurchase', views.creditpurchase, name ='creditpurchase'),
 ]
