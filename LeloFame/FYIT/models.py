@@ -24,11 +24,6 @@ class Profile(AbstractUser):
         n = obj.username
         return n
     
-    def Name(self, *args, **kwargs):
-        a = self.username
-        obj = Profile.objects.get(username=a)
-        n = obj.name
-        return n
     
     def Credit(self, *args, **kwargs):
         a = self.username
@@ -66,15 +61,16 @@ class CreditPurchaseLog(models.Model):
 
 class CreditPurchaseRequest(models.Model):
     username = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    credit = models.IntegerField()
+    amount = models.IntegerField()
     paymentslip = models.FileField(upload_to='paymentslip/',null=True)
     status = models.BooleanField(default=False)
-
-
-
 
 class LeloFameRequest(models.Model):
     username = models.ForeignKey(Profile, on_delete=models.CASCADE)
     userusername = models.CharField(max_length=200)              # platform user username like instagram username facebookusername etc
     platform = models.CharField(max_length=200)                 # platform like instagram 
     type = models.CharField(max_length=200)                     # like followers etc
-    request = models.CharField(max_length=300)                  # package the user selected
+    plan = models.CharField(max_length=300)                  # package the user selected
+
+
