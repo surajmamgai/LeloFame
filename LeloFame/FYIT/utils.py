@@ -1,6 +1,6 @@
 import random
 from django.core.mail import send_mail
-from .models import Profile
+from .models import *
 
 
 def generateuser():
@@ -30,3 +30,10 @@ def send_mail_function(name,email,subject,message):
     mess+='\n'
     mess+=f'Message -{message}'
     send_mail('LELOFAME',mess,'lelo.fame.12@gmail.com',[email],fail_silently=False,)
+
+def creditpurchaselog(username,amount,credit):
+    obj = Profile.objects.get(username=username)
+    obj2 = CreditPurchaseLog(credit_previous_balanace=obj.Credit(),credit_new_balance = obj.Credit()+credit,credit_value=credit,amount = amount)
+    obj2.username = username
+    obj2.save()
+    
