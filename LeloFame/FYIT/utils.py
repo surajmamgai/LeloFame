@@ -58,3 +58,13 @@ def lelofamelog(username, userhandle, credit,platform, type, plan):
     obj2.save()
     return True
 
+def totalspending(username):
+    obj = LeloFameLog.objects.filter(username = username)
+    print(obj)
+    x = 0
+    for o in obj:
+        x = x+ o.credit_spends
+    return x
+
+
+

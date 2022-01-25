@@ -17,14 +17,18 @@ class Profile(AbstractUser):
     password = models.CharField(max_length=100)
     credits =  models.IntegerField(default=0)
 
-
     def Username(self, *args, **kwargs):
         a = self.username
         obj = Profile.objects.get(username=a)
         n = obj.username
         return n
     
-    
+    def Name(self,*args,**kwarg):
+        a = self.username
+        obj = Profile.objects.get(username=a)
+        name = obj.first_name+" "+obj.last_name
+        return name
+        
     def Credit(self, *args, **kwargs):
         a = self.username
         obj = Profile.objects.get(username=a)
