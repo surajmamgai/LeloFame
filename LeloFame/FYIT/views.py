@@ -11,7 +11,7 @@ def dashboard(request):
     username = request.user
     if username.is_authenticated:
         username=Profile.objects.get(username = username.username)
-        return render(request,"dashboard.html",{'username':username,'credits':username.credits})
+        return render(request,"dashboard.html",{'username':username})
     else:
         return redirect('login')
 
@@ -56,27 +56,12 @@ def loginn(request):
 
 #logout
 def logoutt(request):
-    logout(request)
+    if request.user.is_authenticated:
+        logout(request)
     return redirect('login')
 
 #credit log
 
-def credit_view(request):
-    if request.method=='POST':
-        id = request.user.username
-        id = Profile.objects.get(username=id)
-        credit_spend = request.POST.get('credit_spend')
-        platform = request.POST.get('platform')
-        type = request.POST.get('type')
-        user_id = request.POST.get('user_id')
-        flag = utils.left_credit(request.user.username,credit_spend)
-        if flag==-1:
-            return render(request,'dashboard.html',{'mess':"Not enough amount"})
-        else:
-            obj = CreditLog(username=id,credit_spend=credit_spend,platform=platform,type=type,user_id=user_id,credit_left=flag)
-            obj.save()
-        return redirect('/dashboard')
-    return redirect('/dashboard')
 
 def mail(request):
     if request.method=='POST':
@@ -88,20 +73,6 @@ def mail(request):
         return redirect('/')
     return redirect('/')
 
-Price = {
-    'basic': {
-        'credit': 50,
-        'amount': 299
-    },
-    'prime': {
-        'credit': 120,
-        'amount': 499
-    },
-    'premium': {
-        'credit': 200,
-        'amount': 999
-    }
-}
 def lelofamerequest(request):
     user = request.user.username
     if not request.user.is_authenticated:
@@ -153,20 +124,24 @@ def creditpurchase(request):
         return redirect('dashboard/')
     return render(request,'creditpurchase.html')
 
-
-
-
-
         
 
 
-
-
-
-
-    return render(request,'creditpurchase.html')
-        
-
-
+def credit_view(request):
+    if request.method=='POST':
+        id = request.user.username
+        id = Profile.objects.get(username=id)
+        credit_spend = request.POST.get('credit_spend')
+        platform = request.POST.get('platform')
+        type = request.POST.get('type')
+        user_id = request.POST.get('user_id')
+        flag = utils.left_credit(request.user.username,credit_spend)
+        if flag==-1:
+            return render(request,'dashboard.html',{'mess':"Not enough amount"})
+        else:
+            obj = CreditLog(username=id,credit_spend=credit_spend,platform=platform,type=type,user_id=user_id,credit_left=flag)
+            obj.save()
+        return redirect('/dashboard')
+    return redirect('/dashboard')
 
 
