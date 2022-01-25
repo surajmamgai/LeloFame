@@ -34,6 +34,27 @@ def send_mail_function(name,email,subject,message):
 def creditpurchaselog(username,amount,credit):
     obj = Profile.objects.get(username=username)
     obj2 = CreditPurchaseLog(credit_previous_balanace=obj.Credit(),credit_new_balance = obj.Credit()+credit,credit_value=credit,amount = amount)
+    obj.credits = obj.Credit()+credit
+    obj2.username = username
+    obj.save()
+    obj2.save()
+
+def lelofamerequestpossible(username, credit):
+    obj = Profile.objects.get(username = username)
+    if obj.Credit()<credit:
+        return False
+    else:
+        return True
+
+
+
+def lelofamelog(username, userhandle, credit,platform, type, plan):
+    obj = Profile.objects.get(username = username)
+    if lelofamerequestpossible(username,credit)==False:
+        return False
+    obj2 = LeloFameLog(credit_spends=credit,platform=platform,type=type,userhandle=userhandle,plan=plan,credit_left=obj.Credit()-credit)
+    obj.credits = obj.Credit()-credit
     obj2.username = username
     obj2.save()
-    
+    return True
+

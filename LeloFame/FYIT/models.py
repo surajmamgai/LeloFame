@@ -41,15 +41,15 @@ class Profile(AbstractUser):
         return self.username
     
 
-class CreditLog(models.Model):
+class LeloFameLog(models.Model):
     username = models.ForeignKey(Profile, on_delete=models.CASCADE)
     credit_spends = models.IntegerField()
     platform = models.CharField(max_length=200)                  # facebook, instagram, youtube etc.
     type = models.CharField(max_length=200)                      #like or share or subscribe or followers etc.
-    userusername = models.CharField(max_length=200)                    # user username of the platform
+    userhandle = models.CharField(max_length=200)                # user username of the platform
     credit_left = models.IntegerField()
     date = models.DateTimeField(default = timezone.now)
-
+    plan = models.CharField(max_length=300)
 
 class CreditPurchaseLog(models.Model):
     username = models.ForeignKey(Profile, on_delete=models.CASCADE)
