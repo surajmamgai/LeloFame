@@ -8,12 +8,14 @@ def index(request):
     return render(request,"index.html")
 
 def dashboard(request):
+
     username = request.user
     if username.is_authenticated:
+        totalspending = utils.totalspending(username)
         username=Profile.objects.get(username = username.username)
-        return render(request,"dashboard.html",{'username':username})
+        return render(request,"dashboard.html",{'username':username,'spending':totalspending})
     else:
-        return redirect('login')
+       return redirect('login')
 
 
 def creditpurchases(request):
@@ -33,7 +35,10 @@ def signup(request):
             p = "Password and Confirm Password doesn't matched!"
             return render(request,"signup.html",{'p':p})
         obj.save()
-        return redirect('login')
+        user = authenticate(request,username=id, password=password)
+        if user is not None:
+            login(request,user)
+            return redirect('dashboard/')
     return render(request,"signup.html",{'p':''})
 #login
 def loginn(request):
@@ -58,7 +63,7 @@ def loginn(request):
 def logoutt(request):
     if request.user.is_authenticated:
         logout(request)
-    return redirect('login')
+    return redirect('index')
 
 #credit log
 
@@ -127,21 +132,6 @@ def creditpurchase(request):
         
 
 
-def credit_view(request):
-    if request.method=='POST':
-        id = request.user.username
-        id = Profile.objects.get(username=id)
-        credit_spend = request.POST.get('credit_spend')
-        platform = request.POST.get('platform')
-        type = request.POST.get('type')
-        user_id = request.POST.get('user_id')
-        flag = utils.left_credit(request.user.username,credit_spend)
-        if flag==-1:
-            return render(request,'dashboard.html',{'mess':"Not enough amount"})
-        else:
-            obj = CreditLog(username=id,credit_spend=credit_spend,platform=platform,type=type,user_id=user_id,credit_left=flag)
-            obj.save()
-        return redirect('/dashboard')
-    return redirect('/dashboard')
+
 
 

@@ -3,7 +3,7 @@ from django.urls import path,include
 from FYIT import views
 
 urlpatterns = [ 
-    path('',views.index),
+    path('',views.index,name='index'),
     path('dashboard/',views.dashboard),
     path('login', views.loginn,name='login'),
     path('signup',views.signup),
