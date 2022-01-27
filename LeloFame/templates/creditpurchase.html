@@ -3,77 +3,11 @@
 <head>
   <title>Credit Purchase || LeloFame</title>
   {% load static %}
-  <link rel="stylesheet" type="text/css" href="{% static 'assets/css/creditpurchase.css' %}">
-  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans:Condensed" />
-  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,800' rel='stylesheet' type='text/css'>
-
-
-  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-  <script src="{% static 'assets/js/creditpurchase.js' %}"></script>
 
 </head>
 
 <body>
-  <div id="container">
-    <div class="whole">
-      <div class="type">
-        <p>BASIC</p>
-      </div>
-      <div class="plan">
-        <div class="header">
-          <span></span>299<sup>₹</sup>
-          <p class="month">250 Credits</p>
-        </div>
-        <div class="price">
-          <form action="/creditpurchase" method="post">
-            {% csrf_token %}
-            <input type="text" name="plan" value="basic" hidden>
-            <button type="submit">PURCHASE</button>
-          </form>
-        </div>
-      </div>
-    </div>
-    <div class="whole">
-      <div class="type standard">
-        <p>PRIME</p>
-      </div>
-      <div class="plan">
-
-        <div class="header">
-          <span></span>499<sup>₹</sup>
-          <p class="month">500 Credits</p>
-        </div>
-
-
-        <div class="price">
-          <form action="/creditpurchase" method="post">
-            {% csrf_token %}
-            <input type="text" name="plan" value="prime" hidden>
-            <button type="submit">PURCHASE</button>
-          </form>
-        </div>
-      </div>
-    </div>
-
-    <div class="whole ">
-      <div class="type ultimate ">
-        <p>Premium</p>
-      </div>
-      <div class="plan">
-
-        <div class="header">
-          <span></span>999<sup>₹</sup>
-          <p class="month">1200 Credits</p>
-        </div>
-        <div class="price">
-          <form action="/creditpurchase" method="post">
-            {% csrf_token %}
-            <input type="text" name="plan" value="Premium" hidden>
-            <button type="submit">PURCHASE</button>
-          </form>
-        </div>
-      </div>
-    </div>
+  
 
 
 

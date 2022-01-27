@@ -12,6 +12,8 @@ def generateuser():
         return str(r)
     u = generateuser()
 
+
+
 def left_credit(user,to_deduct):
     obj = Profile.objects.get(id=user)
     total = obj.credit
@@ -30,6 +32,7 @@ def send_mail_function(name,email,subject,message):
     mess+='\n'
     mess+=f'Message -{message}'
     send_mail('LELOFAME',mess,'lelo.fame.12@gmail.com',[email],fail_silently=False,)
+
 
 def creditpurchaselog(username,amount,credit):
     obj = Profile.objects.get(username=username)
@@ -57,6 +60,8 @@ def lelofamelog(username, userhandle, credit,platform, type, plan):
     obj2.username = username
     obj2.save()
     return True
+
+
 
 def totalspending(username):
     obj = LeloFameLog.objects.filter(username = username)
