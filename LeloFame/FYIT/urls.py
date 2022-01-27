@@ -3,13 +3,14 @@ from django.urls import path,include
 from FYIT import views
 
 urlpatterns = [ 
-    path('',views.index),
+    path('',views.index,name='index'),
     path('dashboard/',views.dashboard),
     path('login', views.loginn,name='login'),
     path('signup',views.signup),
     path('contact_us',views.mail),
-    path('lelofarmrequest', views.lelofamerequest),
+    path('lelofamerequest', views.lelofamerequest),
     path('logout',views.logoutt),
+    path('creditpurchases',views.creditpurchases),
     # path('planrequest', views.planrequest),
-    path('creditpurchase', views.creditpurchase),
+    path('creditpurchase', views.creditpurchase, name ='creditpurchase'),
 ]

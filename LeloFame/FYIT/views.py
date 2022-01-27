@@ -8,12 +8,19 @@ def index(request):
     return render(request,"index.html")
 
 def dashboard(request):
-    user = request.user.username
-    print(user)
-    if user is None: 
-        return redirect('login')
-    # username = Profile.objects.get(username = user)
-    return render(request,"dashboard.html")
+
+
+    username = request.user
+    if username.is_authenticated:
+        totalspending = utils.totalspending(username)
+        username=Profile.objects.get(username = username.username)
+        return render(request,"dashboard.html",{'username':username,'spending':totalspending})
+    else:
+       return redirect('login')
+
+
+def creditpurchases(request):
+    return redirect('creditpurchase')
 #login
 def signup(request):
     if request.method=="POST":
@@ -29,7 +36,10 @@ def signup(request):
             p = "Password and Confirm Password doesn't matched!"
             return render(request,"signup.html",{'p':p})
         obj.save()
-        return redirect('login')
+        user = authenticate(request,username=id, password=password)
+        if user is not None:
+            login(request,user)
+            return redirect('dashboard/')
     return render(request,"signup.html",{'p':''})
 #login
 def loginn(request):
@@ -52,27 +62,12 @@ def loginn(request):
 
 #logout
 def logoutt(request):
-    logout(request)
-    return redirect('login')
+    if request.user.is_authenticated:
+        logout(request)
+    return redirect('index')
 
 #credit log
 
-def credit_view(request):
-    if request.method=='POST':
-        id = request.user.username
-        id = Profile.objects.get(username=id)
-        credit_spend = request.POST.get('credit_spend')
-        platform = request.POST.get('platform')
-        type = request.POST.get('type')
-        user_id = request.POST.get('user_id')
-        flag = utils.left_credit(request.user.username,credit_spend)
-        if flag==-1:
-            return render(request,'dashboard.html',{'mess':"Not enough amount"})
-        else:
-            obj = CreditLog(username=id,credit_spend=credit_spend,platform=platform,type=type,user_id=user_id,credit_left=flag)
-            obj.save()
-        return redirect('/dashboard')
-    return redirect('/dashboard')
 
 def mail(request):
     if request.method=='POST':
@@ -84,32 +79,21 @@ def mail(request):
         return redirect('/')
     return redirect('/')
 
-Price = {
-    'basic': {
-        'credit': 50,
-        'amount': 299
-    },
-    'prime': {
-        'credit': 120,
-        'amount': 499
-    },
-    'premium': {
-        'credit': 200,
-        'amount': 999
-    }
-}
 def lelofamerequest(request):
     user = request.user.username
-    if user is None:
+    if not request.user.is_authenticated:
         return redirect('login')
     if request.method == 'POST':
+        print(request.POST)
         userhandle = request.POST.get('userhandle')
         platform = request.POST.get('platform')
         type = request.POST.get('type')
         plan=request.POST.get('plan')
+
         username = Profile.objects.get(username = user)
         # plan = LeloFamePlan[platform][type][plan]
-        obj=LeloFameRequest(username=username,userusername=userhandle,platform=platform,type=type,plan=plan)
+        obj=LeloFameRequest(userhandle=userhandle,platform=platform,type=type,plan=plan)
+        obj.username = username
         obj.save()       
         return redirect('dashboard/')
     return redirect('dashboard/')
@@ -146,19 +130,8 @@ def creditpurchase(request):
         return redirect('dashboard/')
     return render(request,'creditpurchase.html')
 
-
-
-
-
         
 
-
-
-
-
-
-    return render(request,'creditpurchase.html')
-        
 
 
 

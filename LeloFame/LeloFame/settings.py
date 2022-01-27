@@ -69,7 +69,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'LeloFame.wsgi.application'
-
+AUTH_PROFILE_MODULE = 'FYIT.Profile'
 AUTH_USER_MODEL = "FYIT.Profile"
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases

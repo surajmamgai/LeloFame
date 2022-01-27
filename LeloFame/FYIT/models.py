@@ -17,14 +17,18 @@ class Profile(AbstractUser):
     password = models.CharField(max_length=100)
     credits =  models.IntegerField(default=0)
 
-
     def Username(self, *args, **kwargs):
         a = self.username
         obj = Profile.objects.get(username=a)
         n = obj.username
         return n
     
-    
+    def Name(self,*args,**kwarg):
+        a = self.username
+        obj = Profile.objects.get(username=a)
+        name = obj.first_name+" "+obj.last_name
+        return name
+        
     def Credit(self, *args, **kwargs):
         a = self.username
         obj = Profile.objects.get(username=a)
@@ -41,15 +45,15 @@ class Profile(AbstractUser):
         return self.username
     
 
-class CreditLog(models.Model):
+class LeloFameLog(models.Model):
     username = models.ForeignKey(Profile, on_delete=models.CASCADE)
     credit_spends = models.IntegerField()
     platform = models.CharField(max_length=200)                  # facebook, instagram, youtube etc.
     type = models.CharField(max_length=200)                      #like or share or subscribe or followers etc.
-    userusername = models.CharField(max_length=200)                    # user username of the platform
+    userhandle = models.CharField(max_length=200)                # user username of the platform
     credit_left = models.IntegerField()
     date = models.DateTimeField(default = timezone.now)
-
+    plan = models.CharField(max_length=300)
 
 class CreditPurchaseLog(models.Model):
     username = models.ForeignKey(Profile, on_delete=models.CASCADE)
@@ -68,7 +72,7 @@ class CreditPurchaseRequest(models.Model):
 
 class LeloFameRequest(models.Model):
     username = models.ForeignKey(Profile, on_delete=models.CASCADE)
-    userusername = models.CharField(max_length=200)              # platform user username like instagram username facebookusername etc
+    userhandle = models.CharField(max_length=200)              # platform user username like instagram username facebook username etc
     platform = models.CharField(max_length=200)                 # platform like instagram 
     type = models.CharField(max_length=200)                     # like followers etc
     plan = models.CharField(max_length=300)                  # package the user selected

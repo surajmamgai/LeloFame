@@ -34,9 +34,11 @@
       <!-- Right navbar links -->
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
-
-          <button class=".btn-block .btn-flat border p-2 mr-2" style="border-radius:5px; background:#4fd8fe"><i
-              class="fa fa-plus-circle" aria-hidden="true"></i> Add Credits </button>
+          <form action="/creditpurchases" method='post'>
+            {% csrf_token %}
+            <button class=".btn-block .btn-flat border p-2 mr-2" type="submit"  style="border-radius:5px; background:#4fd8fe"><i
+              class="fa fa-plus-circle"></i> Add Credits </button>
+            </form>
         </li>
         <li class="nav-item">
           <a class="nav-link" data-widget="fullscreen" href="#" role="button">
@@ -50,7 +52,7 @@
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-light-primary elevation-4">
       <!-- Brand Logo -->
-      <a href="index3.html" class="brand-link">
+      <a href="../" class="brand-link">
         <img src="{% static '/lelofame_logo.png' %}" class="brand-image" style="margin-left:33px;">
       </a>
 
@@ -59,10 +61,21 @@
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
           <div class="image">
-            <img src="{% static 'dist/img/user2-160x160.jpg' %}" class="img-circle elevation-2" alt="User Image">
+           
+            <!-- <img src="{% static 'dist/img/user2-160x160.jpg' %}" class="img-circle elevation-2" alt="User Image"> -->
           </div>
           <div class="info">
-            <a href="#" class="d-block">Suraj Mamgai</a>
+            Name:
+            <a href="#" class="d-block">{{username.Name}}</a>
+          </div>
+        </div>
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+          <div class="image">
+            <!-- <img src="{% static 'dist/img/user2-160x160.jpg' %}" class="img-circle elevation-2" alt="User Image"> -->
+          </div>
+          <div class="info">
+            Username:
+            <a href="#" class="d-block">{{username}}</a>
           </div>
         </div>
         <!-- /.sidebar-menu -->
@@ -101,9 +114,9 @@
                   <div class="row">
                     <div class="col-sm-6 col-6">
                       <div class="description-block border-right">
-                        <span class="description-percentage text-info"><i class="fas fa-caret-up"
-                            style="color:#4fd8fe"></i> 17%</span>
-                        <h5 class="description-header">$35,210.43</h5>
+                        <!-- <span class="description-percentage text-info"><i class="fas fa-caret-up"
+                            style="color:#4fd8fe"></i> 17%</span> -->
+                        <h5 class="description-header">{{ username.credits }} ₹</h5>
                         <span class="description-text">CREDITS BALANCE</span>
                       </div>
                       <!-- /.description-block -->
@@ -111,9 +124,9 @@
                     <!-- /.col -->
                     <div class="col-sm-6 col-6">
                       <div class="description-block">
-                        <span class="description-percentage text-info"><i class="fas fa-caret-down"
-                            style="color:#4fd8fe"></i> 18%</span>
-                        <h5 class="description-header">1200</h5>
+                        <!-- <span class="description-percentage text-info"><i class="fas fa-caret-down"
+                            style="color:#4fd8fe"></i> 18%</span> -->
+                        <h5 class="description-header">{{spending}}  ₹</h5>
                         <span class="description-text">SPENDINGS</span>
                       </div>
                       <!-- /.description-block -->
@@ -431,18 +444,19 @@
                 </div>
                 </div>
                 <div class="flip-card-back">
-                  <form>
+                  <form action="/lelofamerequest" method='post'> 
+                    {% csrf_token %}
                     <div class="input-group mb-3 p-4">
                       <div class="input-group-prepend">
                         <span class="input-group-text">@</span>
+                        <input type="text" class="form-control" name='userhandle' placeholder="Username">
                       </div>
-                      <input type="text" class="form-control" placeholder="Username">
+                      <input type="text" name="platform" value="facebook" hidden/>
+                      <input type="text" name="type" value="followers" hidden/>
+                      <input type="text" name="plan" value="basic" hidden/>
+                      <button type="submit" class="btn">Submit</button>
                     </div>
-                    <input type="text" name="platform" value="facebook" hidden/>
-                    <input type="text" name="type" value="followers" hidden/>
-                    <input type="text" name="plan" value="basic" hidden/>
-                    <button type="submit" class="btn">Submit</button>
-                  </form>
+                    </form>
                 </div>
                 </div>
               </div>
@@ -482,12 +496,13 @@
                 </div>
                 </div>
                 <div class="flip-card-back">
-                  <form>
+                  <form action="/lelofamerequest" method='post'> 
+                    {% csrf_token %}
                    <div class="input-group mb-3 p-4">
                       <div class="input-group-prepend">
                         <span class="input-group-text">@</span>
                       </div>
-                      <input type="text" class="form-control" placeholder="Username">
+                      <input type="text" class="form-control"  name ="userhandle" placeholder="Username">
                     </div>
                     <input type="text" name="platform" value="facebook" hidden/>
                     <input type="text" name="type" value="followers" hidden/>
@@ -534,12 +549,13 @@
                 </div>
                 </div>
                 <div class="flip-card-back">
-                  <form>
+                  <form action="/lelofamerequest" method='post'> 
+                    {% csrf_token %}
                    <div class="input-group mb-3 p-4">
                       <div class="input-group-prepend">
                         <span class="input-group-text">@</span>
                       </div>
-                      <input type="text" class="form-control" placeholder="Username">
+                      <input type="text" class="form-control"  name ="userhandle" placeholder="Username">
                     </div>
                     <input type="text" name="platform" value="facebook" hidden/>
                     <input type="text" name="type" value="followers" hidden/>
@@ -600,12 +616,13 @@
                 </div>
                 </div>
                 <div class="flip-card-back">
-                  <form>
+                  <form action="/lelofamerequest" method='post'>  
+                    {% csrf_token %}
                    <div class="input-group mb-3 p-4">
                       <div class="input-group-prepend">
                         <span class="input-group-text">@</span>
                       </div>
-                      <input type="text" class="form-control" placeholder="Username">
+                      <input type="text" class="form-control"  name ="userhandle" placeholder="Username">
                     </div>
                     <input type="text" name="platform" value="facebook" hidden/>
                     <input type="text" name="type" value="likes" hidden/>
@@ -651,12 +668,13 @@
                 </div>
                 </div>
                 <div class="flip-card-back">
-                  <form>
+                  <form action="/lelofamerequest" method='post'> 
+                    {% csrf_token %}
                    <div class="input-group mb-3 p-4">
                       <div class="input-group-prepend">
                         <span class="input-group-text">@</span>
                       </div>
-                      <input type="text" class="form-control" placeholder="Username">
+                      <input type="text" class="form-control"  name ="userhandle" placeholder="Username">
                     </div>
                     <input type="text" name="platform" value="facebook" hidden/>
                     <input type="text" name="type" value="likes" hidden/>
@@ -703,12 +721,13 @@
                 </div>
                 </div>
                 <div class="flip-card-back">
-                  <form>
+                  <form action="/lelofamerequest" method='post'> 
+                    {% csrf_token %}
                    <div class="input-group mb-3 p-4">
                       <div class="input-group-prepend">
                         <span class="input-group-text">@</span>
                       </div>
-                      <input type="text" class="form-control" placeholder="Username">
+                      <input type="text" class="form-control"  name ="userhandle" placeholder="Username">
                     </div>
                     <input type="text" name="platform" value="facebook" hidden/>
                     <input type="text" name="type" value="likes" hidden/>
@@ -769,12 +788,12 @@
                 </div>
                 </div>
                 <div class="flip-card-back">
-                  <form>
+                  <form action="/lelofamerequest" method='post'> {% csrf_token %}
                    <div class="input-group mb-3 p-4">
                       <div class="input-group-prepend">
                         <span class="input-group-text">@</span>
                       </div>
-                      <input type="text" class="form-control" placeholder="Username">
+                      <input type="text" class="form-control"  name ="userhandle" placeholder="Username">
                     </div>
                     <input type="text" name="platform" value="facebook" hidden/>
                     <input type="text" name="type" value="comments" hidden/>
@@ -820,18 +839,18 @@
                 </div>
                 </div>
                 <div class="flip-card-back">
-                  <form>
+                  <form action="/lelofamerequest" method='post'> {% csrf_token %}
                    <div class="input-group mb-3 p-4">
                       <div class="input-group-prepend">
                         <span class="input-group-text">@</span>
                       </div>
-                      <input type="text" class="form-control" placeholder="Username">
-                    </div>
-                    <input type="text" name="platform" value="facebook" hidden/>
-                    <input type="text" name="type" value="comments" hidden/>
-                    <input type="text" name="plan" value="prime" hidden/>
-                    <button type="submit" class="btn">Submit</button>
-                  </form>
+                      <input type="text" name="userhandle" placeholder="Username"/>
+                      <input type="text" name="platform" value="facebook" hidden/>
+                      <input type="text" name="type" value="comments" hidden/>
+                      <input type="text" name="plan" value="prime" hidden/>
+                      <button type="submit" class="btn">Submit</button>
+                    </form>
+                  </div>
                 </div>
                 </div>
               </div>
@@ -872,12 +891,12 @@
                 </div>
                 </div>
                 <div class="flip-card-back">
-                  <form>
+                  <form action="/lelofamerequest" method='post'> {% csrf_token %}
                    <div class="input-group mb-3 p-4">
                       <div class="input-group-prepend">
                         <span class="input-group-text">@</span>
                       </div>
-                      <input type="text" class="form-control" placeholder="Username">
+                      <input type="text" class="form-control"  name ="userhandle" placeholder="Username">
                     </div>
                     <input type="text" name="platform" value="facebook" hidden/>
                     <input type="text" name="type" value="comments" hidden/>
@@ -938,12 +957,12 @@
                 </div>
                 </div>
                 <div class="flip-card-back">
-                  <form>
+                  <form action="/lelofamerequest" method='post'> {% csrf_token %}
                    <div class="input-group mb-3 p-4">
                       <div class="input-group-prepend">
                         <span class="input-group-text">@</span>
                       </div>
-                      <input type="text" class="form-control" placeholder="Username">
+                      <input type="text" class="form-control"  name ="userhandle" placeholder="Username">
                     </div>
                     <input type="text" name="platform" value="instagram" hidden/>
                     <input type="text" name="type" value="followers" hidden/>
@@ -989,12 +1008,12 @@
                 </div>
                 </div>
                 <div class="flip-card-back">
-                  <form>
+                  <form action="/lelofamerequest" method='post'> {% csrf_token %}
                    <div class="input-group mb-3 p-4">
                       <div class="input-group-prepend">
                         <span class="input-group-text">@</span>
                       </div>
-                      <input type="text" class="form-control" placeholder="Username">
+                      <input type="text" class="form-control"  name ="userhandle" placeholder="Username">
                     </div>
                     <input type="text" name="platform" value="instagram" hidden/>
                     <input type="text" name="type" value="followers" hidden/>
@@ -1041,12 +1060,12 @@
                 </div>
                 </div>
                 <div class="flip-card-back">
-                  <form>
+                  <form action="/lelofamerequest" method='post'> {% csrf_token %}
                    <div class="input-group mb-3 p-4">
                       <div class="input-group-prepend">
                         <span class="input-group-text">@</span>
                       </div>
-                      <input type="text" class="form-control" placeholder="Username">
+                      <input type="text" class="form-control"  name ="userhandle" placeholder="Username">
                     </div>
                     <input type="text" name="platform" value="instagram" hidden/>
                     <input type="text" name="type" value="followers" hidden/>
@@ -1107,12 +1126,12 @@
                 </div>
                 </div>
                 <div class="flip-card-back">
-                  <form>
+                  <form action="/lelofamerequest" method='post'> {% csrf_token %}
                    <div class="input-group mb-3 p-4">
                       <div class="input-group-prepend">
                         <span class="input-group-text">@</span>
                       </div>
-                      <input type="text" class="form-control" placeholder="Username">
+                      <input type="text" class="form-control"  name ="userhandle" placeholder="Username">
                     </div>
                     <input type="text" name="platform" value="instagram" hidden/>
                     <input type="text" name="type" value="likes" hidden/>
@@ -1158,12 +1177,12 @@
                 </div>
                 </div>
                 <div class="flip-card-back">
-                  <form>
+                  <form action="/lelofamerequest" method='post'> {% csrf_token %}
                    <div class="input-group mb-3 p-4">
                       <div class="input-group-prepend">
                         <span class="input-group-text">@</span>
                       </div>
-                      <input type="text" class="form-control" placeholder="Username">
+                      <input type="text" class="form-control"  name ="userhandle" placeholder="Username">
                     </div>
                     <input type="text" name="platform" value="instagram" hidden/>
                     <input type="text" name="type" value="likes" hidden/>
@@ -1210,12 +1229,12 @@
                 </div>
                 </div>
                 <div class="flip-card-back">
-                  <form>
+                  <form action="/lelofamerequest" method='post'> {% csrf_token %}
                    <div class="input-group mb-3 p-4">
                       <div class="input-group-prepend">
                         <span class="input-group-text">@</span>
                       </div>
-                      <input type="text" class="form-control" placeholder="Username">
+                      <input type="text" class="form-control"  name ="userhandle" placeholder="Username">
                     </div>
                     <input type="text" name="platform" value="instagram" hidden/>
                     <input type="text" name="type" value="likes" hidden/>
@@ -1276,12 +1295,12 @@
                 </div>
                 </div>
                 <div class="flip-card-back">
-                  <form>
+                  <form action="/lelofamerequest" method='post'> {% csrf_token %}
                    <div class="input-group mb-3 p-4">
                       <div class="input-group-prepend">
                         <span class="input-group-text">@</span>
                       </div>
-                      <input type="text" class="form-control" placeholder="Username">
+                      <input type="text" class="form-control"  name ="userhandle" placeholder="Username">
                     </div>
                     <input type="text" name="platform" value="instagram" hidden/>
                     <input type="text" name="type" value="comments" hidden/>
@@ -1326,12 +1345,12 @@
                 </div>
                 </div>
                 <div class="flip-card-back">
-                  <form>
+                  <form action="/lelofamerequest" method='post'> {% csrf_token %}
                    <div class="input-group mb-3 p-4">
                       <div class="input-group-prepend">
                         <span class="input-group-text">@</span>
                       </div>
-                      <input type="text" class="form-control" placeholder="Username">
+                      <input type="text" class="form-control"  name ="userhandle" placeholder="Username">
                     </div>
                     <input type="text" name="platform" value="instagram" hidden/>
                     <input type="text" name="type" value="comments" hidden/>
@@ -1378,12 +1397,12 @@
                 </div>
                 </div>
                 <div class="flip-card-back">
-                  <form>
+                  <form action="/lelofamerequest" method='post'> {% csrf_token %}
                    <div class="input-group mb-3 p-4">
                       <div class="input-group-prepend">
                         <span class="input-group-text">@</span>
                       </div>
-                      <input type="text" class="form-control" placeholder="Username">
+                      <input type="text" class="form-control"  name ="userhandle" placeholder="Username">
                     </div>
                     <input type="text" name="platform" value="instagram" hidden/>
                     <input type="text" name="type" value="comments" hidden/>
@@ -1444,12 +1463,12 @@
                 </div>
                 </div>
                 <div class="flip-card-back">
-                  <form>
+                  <form action="/lelofamerequest" method='post'> {% csrf_token %}
                    <div class="input-group mb-3 p-4">
                       <div class="input-group-prepend">
                         <span class="input-group-text">@</span>
                       </div>
-                      <input type="text" class="form-control" placeholder="Username">
+                      <input type="text" class="form-control"  name ="userhandle" placeholder="Username">
                     </div>
                     <input type="text" name="platform" value="twitter" hidden/>
                     <input type="text" name="type" value="followers" hidden/>
@@ -1495,12 +1514,12 @@
                 </div>
                 </div>
                 <div class="flip-card-back">
-                  <form>
+                  <form action="/lelofamerequest" method='post'> {% csrf_token %}
                    <div class="input-group mb-3 p-4">
                       <div class="input-group-prepend">
                         <span class="input-group-text">@</span>
                       </div>
-                      <input type="text" class="form-control" placeholder="Username">
+                      <input type="text" class="form-control"  name ="userhandle" placeholder="Username">
                     </div>
                     <input type="text" name="platform" value="twitter" hidden/>
                     <input type="text" name="type" value="followers" hidden/>
@@ -1547,12 +1566,12 @@
                 </div>
                 </div>
                 <div class="flip-card-back">
-                  <form>
+                  <form action="/lelofamerequest" method='post'> {% csrf_token %}
                    <div class="input-group mb-3 p-4">
                       <div class="input-group-prepend">
                         <span class="input-group-text">@</span>
                       </div>
-                      <input type="text" class="form-control" placeholder="Username">
+                      <input type="text" class="form-control"  name ="userhandle" placeholder="Username">
                     </div>
                     <input type="text" name="platform" value="twitter" hidden/>
                     <input type="text" name="type" value="followers" hidden/>
@@ -1613,12 +1632,12 @@
                 </div>
                 </div>
                 <div class="flip-card-back">
-                  <form>
+                  <form action="/lelofamerequest" method='post'> {% csrf_token %}
                    <div class="input-group mb-3 p-4">
                       <div class="input-group-prepend">
                         <span class="input-group-text">@</span>
                       </div>
-                      <input type="text" class="form-control" placeholder="Username">
+                      <input type="text" class="form-control"  name ="userhandle" placeholder="Username">
                     </div>
                     <input type="text" name="platform" value="twitter" hidden/>
                     <input type="text" name="type" value="likes" hidden/>
@@ -1664,12 +1683,12 @@
                 </div>
                 </div>
                 <div class="flip-card-back">
-                  <form>
+                  <form action="/lelofamerequest" method='post'> {% csrf_token %}
                    <div class="input-group mb-3 p-4">
                       <div class="input-group-prepend">
                         <span class="input-group-text">@</span>
                       </div>
-                      <input type="text" class="form-control" placeholder="Username">
+                      <input type="text" class="form-control"  name ="userhandle" placeholder="Username">
                     </div>
                     <input type="text" name="platform" value="twitter" hidden/>
                     <input type="text" name="type" value="likes" hidden/>
@@ -1716,12 +1735,12 @@
                 </div>
                 </div>
                 <div class="flip-card-back">
-                  <form>
+                  <form action="/lelofamerequest" method='post'> {% csrf_token %}
                    <div class="input-group mb-3 p-4">
                       <div class="input-group-prepend">
                         <span class="input-group-text">@</span>
                       </div>
-                      <input type="text" class="form-control" placeholder="Username">
+                      <input type="text" class="form-control"  name ="userhandle" placeholder="Username">
                     </div>
                     <input type="text" name="platform" value="twitter" hidden/>
                     <input type="text" name="type" value="likes" hidden/>
@@ -1782,12 +1801,12 @@
                 </div>
                 </div>
                 <div class="flip-card-back">
-                  <form>
+                  <form action="/lelofamerequest" method='post'> {% csrf_token %}
                    <div class="input-group mb-3 p-4">
                       <div class="input-group-prepend">
                         <span class="input-group-text">@</span>
                       </div>
-                      <input type="text" class="form-control" placeholder="Username">
+                      <input type="text" class="form-control"  name ="userhandle" placeholder="Username">
                     </div>
                     <input type="text" name="platform" value="twitter" hidden/>
                     <input type="text" name="type" value="comments" hidden/>
@@ -1833,12 +1852,12 @@
                 </div>
                 </div>
                 <div class="flip-card-back">
-                  <form>
+                  <form action="/lelofamerequest" method='post'> {% csrf_token %}
                    <div class="input-group mb-3 p-4">
                       <div class="input-group-prepend">
                         <span class="input-group-text">@</span>
                       </div>
-                      <input type="text" class="form-control" placeholder="Username">
+                      <input type="text" class="form-control"  name ="userhandle" placeholder="Username">
                     </div>
                     <input type="text" name="platform" value="twitter" hidden/>
                     <input type="text" name="type" value="comments" hidden/>
@@ -1885,12 +1904,12 @@
                 </div>
                 </div>
                 <div class="flip-card-back">
-                  <form>
+                  <form action="/lelofamerequest" method='post'> {% csrf_token %}
                    <div class="input-group mb-3 p-4">
                       <div class="input-group-prepend">
                         <span class="input-group-text">@</span>
                       </div>
-                      <input type="text" class="form-control" placeholder="Username">
+                      <input type="text" class="form-control"  name ="userhandle" placeholder="Username">
                     </div>
                     <input type="text" name="platform" value="twitter" hidden/>
                     <input type="text" name="type" value="comments" hidden/>
@@ -1952,12 +1971,12 @@
                 </div>
                 </div>
                 <div class="flip-card-back">
-                  <form>
+                  <form action="/lelofamerequest" method='post'> {% csrf_token %}
                    <div class="input-group mb-3 p-4">
                       <div class="input-group-prepend">
                         <span class="input-group-text">@</span>
                       </div>
-                      <input type="text" class="form-control" placeholder="Username">
+                      <input type="text" class="form-control"  name ="userhandle" placeholder="Username">
                     </div>
                     <input type="text" name="platform" value="twitter" hidden/>
                     <input type="text" name="type" value="retweets" hidden/>
@@ -2003,12 +2022,12 @@
                 </div>
                 </div>
                 <div class="flip-card-back">
-                  <form>
+                  <form action="/lelofamerequest" method='post'> {% csrf_token %}
                    <div class="input-group mb-3 p-4">
                       <div class="input-group-prepend">
                         <span class="input-group-text">@</span>
                       </div>
-                      <input type="text" class="form-control" placeholder="Username">
+                      <input type="text" class="form-control"  name ="userhandle" placeholder="Username">
                     </div>
                     <input type="text" name="platform" value="twitter" hidden/>
                     <input type="text" name="type" value="retweets" hidden/>
@@ -2055,12 +2074,12 @@
                 </div>
                 </div>
                 <div class="flip-card-back">
-                  <form>
+                  <form action="/lelofamerequest" method='post'> {% csrf_token %}
                    <div class="input-group mb-3 p-4">
                       <div class="input-group-prepend">
                         <span class="input-group-text">@</span>
                       </div>
-                      <input type="text" class="form-control" placeholder="Username">
+                      <input type="text" class="form-control"  name ="userhandle" placeholder="Username">
                     </div>
                     <input type="text" name="platform" value="twitter" hidden/>
                     <input type="text" name="type" value="retweets" hidden/>
@@ -2121,12 +2140,12 @@
                 </div>
                 </div>
                 <div class="flip-card-back">
-                  <form>
+                  <form action="/lelofamerequest" method='post'> {% csrf_token %}
                     <div class="input-group mb-3 p-4">
                       <div class="input-group-prepend">
                         <span class="input-group-text">@</span>
                       </div>
-                      <input type="text" class="form-control" placeholder="Username">
+                      <input type="text" class="form-control"  name ="userhandle" placeholder="Username">
                     </div>
                     <input type="text" name="platform" value="linkedin" hidden/>
                     <input type="text" name="type" value="followers" hidden/>
@@ -2172,12 +2191,12 @@
                 </div>
                 </div>
                 <div class="flip-card-back">
-                  <form>
+                  <form action="/lelofamerequest" method='post'> {% csrf_token %}
                     <div class="input-group mb-3 p-4">
                       <div class="input-group-prepend">
                         <span class="input-group-text">@</span>
                       </div>
-                      <input type="text" class="form-control" placeholder="Username">
+                      <input type="text" class="form-control"  name ="userhandle" placeholder="Username">
                     </div>
                     <input type="text" name="platform" value="linkedin" hidden/>
                     <input type="text" name="type" value="followers" hidden/>
@@ -2224,12 +2243,12 @@
                 </div>
                 </div>
                 <div class="flip-card-back">
-                  <form>
+                  <form action="/lelofamerequest" method='post'> {% csrf_token %}
                     <div class="input-group mb-3 p-4">
                       <div class="input-group-prepend">
                         <span class="input-group-text">@</span>
                       </div>
-                      <input type="text" class="form-control" placeholder="Username">
+                      <input type="text" class="form-control"  name ="userhandle" placeholder="Username">
                     </div>
                     <input type="text" name="platform" value="linkedin" hidden/>
                     <input type="text" name="type" value="followers" hidden/>
@@ -2290,12 +2309,12 @@
                 </div>
                 </div>
                 <div class="flip-card-back">
-                  <form>
+                  <form action="/lelofamerequest" method='post'> {% csrf_token %}
                     <div class="input-group mb-3 p-4">
                       <div class="input-group-prepend">
                         <span class="input-group-text">@</span>
                       </div>
-                      <input type="text" class="form-control" placeholder="Username">
+                      <input type="text" class="form-control"  name ="userhandle" placeholder="Username">
                     </div>
                     <input type="text" name="platform" value="linkedin" hidden/>
                     <input type="text" name="type" value="likes" hidden/>
@@ -2341,12 +2360,12 @@
                 </div>
                 </div>
                 <div class="flip-card-back">
-                  <form>
+                  <form action="/lelofamerequest" method='post'> {% csrf_token %}
                     <div class="input-group mb-3 p-4">
                       <div class="input-group-prepend">
                         <span class="input-group-text">@</span>
                       </div>
-                      <input type="text" class="form-control" placeholder="Username">
+                      <input type="text" class="form-control"  name ="userhandle" placeholder="Username">
                     </div>
                     <input type="text" name="platform" value="linkedin" hidden/>
                     <input type="text" name="type" value="likes" hidden/>
@@ -2393,12 +2412,12 @@
                 </div>
                 </div>
                 <div class="flip-card-back">
-                  <form>
+                  <form action="/lelofamerequest" method='post'> {% csrf_token %}
                     <div class="input-group mb-3 p-4">
                       <div class="input-group-prepend">
                         <span class="input-group-text">@</span>
                       </div>
-                      <input type="text" class="form-control" placeholder="Username">
+                      <input type="text" class="form-control"  name ="userhandle" placeholder="Username">
                     </div>
                     <input type="text" name="platform" value="linkedin" hidden/>
                     <input type="text" name="type" value="likes" hidden/>
@@ -2459,12 +2478,12 @@
                 </div>
                 </div>
                 <div class="flip-card-back">
-                  <form>
+                  <form action="/lelofamerequest" method='post'> {% csrf_token %}
                     <div class="input-group mb-3 p-4">
                       <div class="input-group-prepend">
                         <span class="input-group-text">@</span>
                       </div>
-                      <input type="text" class="form-control" placeholder="Username">
+                      <input type="text" class="form-control"  name ="userhandle" placeholder="Username">
                     </div>
                     <input type="text" name="platform" value="linkedin" hidden/>
                     <input type="text" name="type" value="comments" hidden/>
@@ -2510,12 +2529,12 @@
                 </div>
                 </div>
                 <div class="flip-card-back">
-                  <form>
+                  <form action="/lelofamerequest" method='post'> {% csrf_token %}
                     <div class="input-group mb-3 p-4">
                       <div class="input-group-prepend">
                         <span class="input-group-text">@</span>
                       </div>
-                      <input type="text" class="form-control" placeholder="Username">
+                      <input type="text" class="form-control"  name ="userhandle" placeholder="Username">
                     </div>
                     <input type="text" name="platform" value="linkedin" hidden/>
                     <input type="text" name="type" value="comments" hidden/>
@@ -2562,12 +2581,12 @@
                 </div>
                 </div>
                 <div class="flip-card-back">
-                  <form>
+                  <form action="/lelofamerequest" method='post'> {% csrf_token %}
                     <div class="input-group mb-3 p-4">
                       <div class="input-group-prepend">
                         <span class="input-group-text">@</span>
                       </div>
-                      <input type="text" class="form-control" placeholder="Username">
+                      <input type="text" class="form-control"  name ="userhandle" placeholder="Username">
                     </div>
                     <input type="text" name="platform" value="linkedin" hidden/>
                     <input type="text" name="type" value="comments" hidden/>
@@ -2628,12 +2647,12 @@
                 </div>
                 </div>
                 <div class="flip-card-back">
-                  <form>
+                  <form action="/lelofamerequest" method='post'> {% csrf_token %}
                     <div class="input-group mb-3 p-4">
                       <div class="input-group-prepend">
                         <span class="input-group-text">@</span>
                       </div>
-                      <input type="text" class="form-control" placeholder="Username">
+                      <input type="text" class="form-control"  name ="userhandle" placeholder="Username">
                     </div>
                     <input type="text" name="platform" value="youtube" hidden/>
                     <input type="text" name="type" value="subscribers" hidden/>
@@ -2679,12 +2698,12 @@
                 </div>
                 </div>
                 <div class="flip-card-back">
-                  <form>
+                  <form action="/lelofamerequest" method='post'> {% csrf_token %}
                     <div class="input-group mb-3 p-4">
                       <div class="input-group-prepend">
                         <span class="input-group-text">@</span>
                       </div>
-                      <input type="text" class="form-control" placeholder="Username">
+                      <input type="text" class="form-control"  name ="userhandle" placeholder="Username">
                     </div>
                     <input type="text" name="type" value="subscribers" hidden/>
                     <input type="text" name="plan" value="prime" hidden/>
@@ -2730,12 +2749,12 @@
                 </div>
                 </div>
                 <div class="flip-card-back">
-                  <form>
+                  <form action="/lelofamerequest" method='post'> {% csrf_token %}
                     <div class="input-group mb-3 p-4">
                       <div class="input-group-prepend">
                         <span class="input-group-text">@</span>
                       </div>
-                      <input type="text" class="form-control" placeholder="Username">
+                      <input type="text" class="form-control"  name ="userhandle" placeholder="Username">
                     </div>
                     <input type="text" name="platform" value="youtube" hidden/>
                     <input type="text" name="type" value="subscribers" hidden/>
@@ -2796,12 +2815,12 @@
                 </div>
                 </div>
                 <div class="flip-card-back">
-                  <form>
+                  <form action="/lelofamerequest" method='post'> {% csrf_token %}
                     <div class="input-group mb-3 p-4">
                       <div class="input-group-prepend">
                         <span class="input-group-text">@</span>
                       </div>
-                      <input type="text" class="form-control" placeholder="Username">
+                      <input type="text" class="form-control"  name ="userhandle" placeholder="Username">
                     </div>
                     <input type="text" name="platform" value="youtube" hidden/>
                     <input type="text" name="type" value="likes" hidden/>
@@ -2847,12 +2866,12 @@
                 </div>
                 </div>
                 <div class="flip-card-back">
-                  <form>
+                  <form action="/lelofamerequest" method='post'> {% csrf_token %}
                     <div class="input-group mb-3 p-4">
                       <div class="input-group-prepend">
                         <span class="input-group-text">@</span>
                       </div>
-                      <input type="text" class="form-control" placeholder="Username">
+                      <input type="text" class="form-control"  name ="userhandle" placeholder="Username">
                     </div>
                     <input type="text" name="platform" value="youtube" hidden/>
                     <input type="text" name="type" value="likes" hidden/>
@@ -2899,12 +2918,12 @@
                 </div>
                 </div>
                 <div class="flip-card-back">
-                  <form>
+                  <form action="/lelofamerequest" method='post'> {% csrf_token %}
                     <div class="input-group mb-3 p-4">
                       <div class="input-group-prepend">
                         <span class="input-group-text">@</span>
                       </div>
-                      <input type="text" class="form-control" placeholder="Username">
+                      <input type="text" class="form-control"  name ="userhandle" placeholder="Username">
                     </div>
                     <input type="text" name="platform" value="youtube" hidden/>
                     <input type="text" name="type" value="likes" hidden/>
@@ -2965,12 +2984,12 @@
                 </div>
                 </div>
                 <div class="flip-card-back">
-                  <form>
+                  <form action="/lelofamerequest" method='post'> {% csrf_token %}
                    <div class="input-group mb-3 p-4">
                       <div class="input-group-prepend">
                         <span class="input-group-text">@</span>
                       </div>
-                      <input type="text" class="form-control" placeholder="Username">
+                      <input type="text" class="form-control"  name ="userhandle" placeholder="Username">
                     </div>
                     <input type="text" name="platform" value="youtube" hidden/>
                     <input type="text" name="type" value="comments" hidden/>
@@ -3016,12 +3035,12 @@
                 </div>
                 </div>
                 <div class="flip-card-back">
-                  <form>
+                  <form action="/lelofamerequest" method='post'> {% csrf_token %}
                    <div class="input-group mb-3 p-4">
                       <div class="input-group-prepend">
                         <span class="input-group-text">@</span>
                       </div>
-                      <input type="text" class="form-control" placeholder="Username">
+                      <input type="text" class="form-control"  name ="userhandle" placeholder="Username">
                     </div>
                     <input type="text" name="platform" value="youtube" hidden/>
                     <input type="text" name="type" value="comments" hidden/>
@@ -3067,12 +3086,12 @@
                 </div>
                 </div>
                 <div class="flip-card-back">
-                  <form>
+                  <form action="/lelofamerequest" method='post'> {% csrf_token %}
                    <div class="input-group mb-3 p-4">
                       <div class="input-group-prepend">
                         <span class="input-group-text">@</span>
                       </div>
-                      <input type="text" class="form-control" placeholder="Username">
+                      <input type="text" class="form-control"  name ="userhandle" placeholder="Username">
                     </div>
                     <input type="text" name="platform" value="youtube" hidden/>
                     <input type="text" name="type" value="comments" hidden/>
@@ -3133,12 +3152,12 @@
                 </div>
                 </div>
                 <div class="flip-card-back">
-                  <form>
+                  <form action="/lelofamerequest" method='post'> {% csrf_token %}
                    <div class="input-group mb-3 p-4">
                       <div class="input-group-prepend">
                         <span class="input-group-text">@</span>
                       </div>
-                      <input type="text" class="form-control" placeholder="Username">
+                      <input type="text" class="form-control"  name ="userhandle" placeholder="Username">
                     </div>
                     <input type="text" name="platform" value="youtube" hidden/>
                     <input type="text" name="type" value="watchhours" hidden/>
@@ -3184,12 +3203,12 @@
                 </div>
                 </div>
                 <div class="flip-card-back">
-                  <form>
+                  <form action="/lelofamerequest" method='post'> {% csrf_token %}
                    <div class="input-group mb-3 p-4">
                       <div class="input-group-prepend">
                         <span class="input-group-text">@</span>
                       </div>
-                      <input type="text" class="form-control" placeholder="Username">
+                      <input type="text" class="form-control"  name ="userhandle" placeholder="Username">
                     </div>
                     <input type="text" name="platform" value="youtube" hidden/>
                     <input type="text" name="type" value="watchhours" hidden/>
@@ -3235,12 +3254,12 @@
                 </div>
                 </div>
                 <div class="flip-card-back">
-                  <form>
+                  <form action="/lelofamerequest" method='post'> {% csrf_token %}
                    <div class="input-group mb-3 p-4">
                       <div class="input-group-prepend">
                         <span class="input-group-text">@</span>
                       </div>
-                      <input type="text" class="form-control" placeholder="Username">
+                      <input type="text" class="form-control"  name ="userhandle" placeholder="Username">
                     </div>
                     <input type="text" name="platform" value="youtube" hidden/>
                     <input type="text" name="type" value="watchhours" hidden/>
