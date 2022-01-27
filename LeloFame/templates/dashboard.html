@@ -6,6 +6,13 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Dashboard</title>
+  <link rel="stylesheet" type="text/css" href="{% static 'assets/css/creditpurchase.css' %}">
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans:Condensed" />
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,800' rel='stylesheet' type='text/css'>
+
+
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script src="{% static 'assets/js/creditpurchase.js' %}"></script>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -67,15 +74,29 @@
               style="color:#4fd8fe"></i></a>
         </li>
       </ul>
+      <script>
+        function credpurchase(){
+          if(document.getElementById("creditt").innerText=="DASHBOARD")
+          {
+            document.getElementById("content").style.display="block";
+            document.getElementById("credit").style.display="none";
+            document.getElementById("creditt").innerHTML="<i class='fa fa-plus-circle'></i> Add Credits";
+         
+          }
+          else{
 
+            document.getElementById("content").style.display="none";
+            document.getElementById("credit").style.display="block";
+            
+            document.getElementById("creditt").innerText="DASHBOARD";
+          }
+        }
+      </script>
       <!-- Right navbar links -->
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
-          <form action="/creditpurchases" method='post'>
-            {% csrf_token %}
-            <button class=".btn-block .btn-flat border p-2 mr-2" type="submit"  style="border-radius:5px; background:#4fd8fe"><i
+            <button class=".btn-block .btn-flat border p-2 mr-2" id="creditt" onclick="credpurchase()"  style="border-radius:5px; background:#4fd8fe"><i
               class="fa fa-plus-circle"></i> Add Credits </button>
-            </form>
         </li>
         <li class="nav-item">
           <a class="nav-link" data-widget="fullscreen" href="#" role="button">
@@ -300,6 +321,7 @@
               document.getElementById("youtube-4").style.display = "flex";
             }
           </script>
+          <div id="content">
           <div class="row">
             <div class="col-12 col-sm-6 col-md-4" onclick="instagram()">
               <div class="info-box" id="igclk">
@@ -434,6 +456,7 @@
                             }
                           }
                         </script>
+        
           <div class="row" id="facebook-1" style="display:none">
             <div class="col-md-12 col-sm-12 col-12">
               <div class="info-box border">
@@ -3309,6 +3332,64 @@
               <!-- /.widget-user -->
             </div>
           </div>
+        </div>
+        <div id="credit" style="display:none; " >
+          <div id="container">
+            <form action="/creditpurchase" class="whole" method="post">
+            <div class="type">
+              <p>BASIC</p>
+            </div>
+            <div class="plan">
+              <div class="header">
+                <span></span>299<sup>₹</sup>
+                <p class="month">250 Credits</p>
+              </div>
+              <div class="price">
+      
+                  {% csrf_token %}
+                  <input type="text" name="plan" value="basic" hidden>
+                  <button class="price" type="submit">PURCHASE</button>
+                </form>
+            </div>
+          </div>
+          </form>
+            <form action="/creditpurchase" class="whole" method="post">
+            <div class="type standard">
+              <p>PRIME</p>
+            </div>
+            <div class="plan">
+              <div class="header">
+                <span></span>499<sup>₹</sup>
+                <p class="month">500 Credits</p>
+              </div>
+              <div class="price">
+                  {% csrf_token %}
+                  <input type="text" name="plan" value="prime" hidden>
+                  <button type="submit">PURCHASE</button>
+              </div>
+            </div>
+             </form>
+      
+            <form action="/creditpurchase" class="whole" method="post">
+            <div class="type ultimate ">
+              <p>Premium</p>
+            </div>
+            <div class="plan">
+              <div class="header">
+                <span></span>999<sup>₹</sup>
+                <p class="month">1200 Credits</p>
+              </div>
+              <div class="price">
+                
+                  {% csrf_token %}
+                  <input type="text" name="plan" value="Premium" hidden>
+                  <button type="submit">PURCHASE</button>
+              </div>
+          </div>
+          </form>
+        </div>
+      
+        </div>
         </div>
         <!--/. container-fluid -->
       </section>
