@@ -9,8 +9,11 @@ def index(request):
 
 def dashboard(request):
     user = request.user.username
-    username = Profile.objects.get(username = user)
-    return render(request,"dashboard.html",{'username':username,'credits':username.credits})
+    print(user)
+    if user is None: 
+        return redirect('login')
+    # username = Profile.objects.get(username = user)
+    return render(request,"dashboard.html")
 #login
 def signup(request):
     if request.method=="POST":
