@@ -9,6 +9,7 @@ def index(request):
 
 def dashboard(request):
 
+
     username = request.user
     if username.is_authenticated:
         totalspending = utils.totalspending(username)

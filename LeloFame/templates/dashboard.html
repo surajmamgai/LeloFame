@@ -335,7 +335,7 @@
           <style>
             .flip-card {
               width: 100%;
-              height :auto;
+              height : 260px;
               user-select:none;
             }
             
@@ -349,12 +349,13 @@
             .flip-card .flip-card-inner {
               transform: rotateY(180deg);
             }
-            
             .flip-card-front, .flip-card-back {
               backface-visibility: hidden;
             }
             
             .flip-card-back {
+              margin-top:15%;
+              display:none;
               transform: rotateY(180deg);
             }
             .btn{
@@ -366,8 +367,34 @@
                           function xyz(i)
                           {
                             var x=document.getElementsByClassName("clk")[i];
-                            if(x.classList.contains("flip-card")) x.ondblclick=function(){x.classList.remove("flip-card")};
-                            else x.classList.add("flip-card");
+                            var y=document.getElementsByClassName("flip-card-front")[i];
+                            var z=document.getElementsByClassName("flip-card-back")[i];
+                            if(x.classList.contains("flip-card"))
+                            { 
+                              x.ondblclick=function(){
+                                x.classList.remove("flip-card");
+                                y.style.display="block";
+                                z.style.display="none";
+                              };
+                            }
+                            else
+                            {
+                              var a=document.getElementsByClassName("clk");
+                              var b=document.getElementsByClassName("flip-card-front");
+                              var c=document.getElementsByClassName("flip-card-back");
+                              for(var i=0;i<a.length;i++)
+                              {
+                                if(a[i].classList.contains("flip-card"))
+                                {
+                                    a[i].classList.remove("flip-card");
+                                    b[i].style.display="block";
+                                    c[i].style.display="none";
+                                }
+                              }
+                              x.classList.add("flip-card");
+                              y.style.display="none";
+                              z.style.display="block";
+                            }
                           }
                         </script>
           <div class="row" id="facebook-1" style="display:none">
