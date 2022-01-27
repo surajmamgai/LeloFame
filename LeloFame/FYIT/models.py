@@ -76,5 +76,7 @@ class LeloFameRequest(models.Model):
     platform = models.CharField(max_length=200)                 # platform like instagram 
     type = models.CharField(max_length=200)                     # like followers etc
     plan = models.CharField(max_length=300)                  # package the user selected
+    status = models.BooleanField(default=False)
+
 
 

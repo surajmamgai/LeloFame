@@ -1,3 +1,4 @@
+import re
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from FYIT import utils
@@ -95,7 +96,7 @@ def lelofamerequest(request):
         obj=LeloFameRequest(userhandle=userhandle,platform=platform,type=type,plan=plan)
         obj.username = username
         obj.save()       
-        return redirect('dashboard/')
+        return render(request,'dashboard.html',{"success":1})
     return redirect('dashboard/')
 
 Price = {
