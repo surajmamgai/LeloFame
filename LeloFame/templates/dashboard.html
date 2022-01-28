@@ -3333,6 +3333,38 @@
             </div>
           </div>
         </div>
+
+        <!---------------------------------     Modal for qr code for paytments        ----------------------------->
+
+
+
+        <div class="modal fade" id="QRCODE" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <img src="{% static 'qrcode.jpeg' %}" alt="UPI-ID: 8750578258@paytm">
+                <form action="/creditpurchase" enctype="multipart/form-data" method="post">
+                  {% csrf_token %}
+                  <input type="text" name="plan" value="basic" hidden>
+                  <input type="file" class='file' name = "paymentslip" placeholder="Upload the Payment Receipt">
+                  <input type="text" name="trans" placeholder="Transaction Id"> 
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-secondary">Purchase</button>
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
         <div id="credit" style="display:none; " >
           <div id="container">
             <form action="/creditpurchase" class="whole" method="post">
@@ -3348,7 +3380,7 @@
       
                   {% csrf_token %}
                   <input type="text" name="plan" value="basic" hidden>
-                  <button class="price" type="submit">PURCHASE</button>
+                  <button class="price" type="button" data-toggle="modal" data-target="#QRCODE">PURCHASE</button>
                 </form>
             </div>
           </div>

@@ -5,4 +5,4 @@ from FYIT.models import *
 from django.contrib.auth import authenticate, login, logout
 
 def dashboard(request):
-    return render(request,'paneldashboard.html')
+    return render(request,'AdminPanel/admindashboard.html')

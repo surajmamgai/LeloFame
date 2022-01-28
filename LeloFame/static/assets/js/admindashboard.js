@@ -1,46 +1,28 @@
-let Dashboard = (() => {
-	let global = {
-		tooltipOptions: {
-			placement: "right"
-		},
-		menuClass: ".c-menu"
-	};
+// define all UI variable
+const navToggler = document.querySelector('.nav-toggler');
+const navMenu = document.querySelector('.site-navbar ul');
+const navLinks = document.querySelectorAll('.site-navbar a');
 
-	let menuChangeActive = el => {
-		let hasSubmenu = ($(el).hasClass("has-submenu"));
-		$(global.menuClass + " .is-active").removeClass("is-active");
-		$(el).addClass("is-active");
-		
-		// if (hasSubmenu) {
-		// 	$(el).find("ul").slideDown();
-		// }
-	};
+// load all event listners
+allEventListners();
 
-	let sidebarChangeWidth = () => {
-		let $menuItemsTitle = $("li .menu-item__title");
+// functions of all event listners
+function allEventListners() {
+  // toggler icon click event
+  navToggler.addEventListener('click', togglerClick);
+  // nav links click event
+  navLinks.forEach( elem => elem.addEventListener('click', navLinkClick));
+}
 
-		$("body").toggleClass("sidebar-is-reduced sidebar-is-expanded");
-		$(".hamburger-toggle").toggleClass("is-opened");
-		
-		if ($("body").hasClass("sidebar-is-expanded")) {
-			$('[data-toggle="tooltip"]').tooltip("destroy");
-		} else {
-			$('[data-toggle="tooltip"]').tooltip(global.tooltipOptions);
-		}
-		
-	};
+// togglerClick function
+function togglerClick() {
+  navToggler.classList.toggle('toggler-open');
+  navMenu.classList.toggle('open');
+}
 
-	return {
-		init: () => {
-			$(".js-hamburger").on("click", sidebarChangeWidth);
-
-			$(".js-menu li").on("click", e => {
-				menuChangeActive(e.currentTarget);
-			});
-
-			$('[data-toggle="tooltip"]').tooltip(global.tooltipOptions);
-		}
-	};
-})();
-
-Dashboard.init();
+// navLinkClick function
+function navLinkClick() {
+  if(navMenu.classList.contains('open')) {
+    navToggler.click();
+  }
+}
