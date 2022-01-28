@@ -10,7 +10,6 @@ def index(request):
 
 def dashboard(request):
 
-
     username = request.user
     if username.is_authenticated:
         totalspending = utils.totalspending(username)
@@ -22,6 +21,7 @@ def dashboard(request):
 
 def creditpurchases(request):
     return redirect('creditpurchase')
+
 #login
 def signup(request):
     if request.method=="POST":
@@ -43,6 +43,8 @@ def signup(request):
             return redirect('dashboard/')
     return render(request,"signup.html",{'p':''})
 #login
+
+
 def loginn(request):
     if request.user.is_authenticated:
         return redirect('dashboard/')
@@ -85,7 +87,7 @@ def lelofamerequest(request):
     if not request.user.is_authenticated:
         return redirect('login')
     if request.method == 'POST':
-        print(request.POST)
+        # print(request.POST)
         userhandle = request.POST.get('userhandle')
         platform = request.POST.get('platform')
         type = request.POST.get('type')
@@ -95,8 +97,10 @@ def lelofamerequest(request):
         # plan = LeloFamePlan[platform][type][plan]
         obj=LeloFameRequest(userhandle=userhandle,platform=platform,type=type,plan=plan)
         obj.username = username
-        obj.save()       
-        return render(request,'dashboard.html',{"success":1})
+        obj.save()   
+        totalspending = utils.totalspending(username)
+        username=Profile.objects.get(username = username.username)
+        return render(request,"dashboard.html",{'username':username,'spending':totalspending,"success":1})    
     return redirect('dashboard/')
 
 Price = {
@@ -108,7 +112,7 @@ Price = {
         'credit': 120,
         'amount': 499
     },
-    'Premium': {
+    'premium': {
         'credit': 200,
         'amount': 999
     }
@@ -118,9 +122,9 @@ def creditpurchase(request):
     username = request.user.username
     if username is None:
         return redirect('login')
-
     if request.method == 'POST':
-        plan= request.POST.get('plan')
+        print(request.POST)
+        plan= request.POST.get('plan-credit')
         credit = Price[plan]["credit"]
         amount = Price[plan]["amount"]
         paymentslip = request.FILES.get('paymentslip')
@@ -128,12 +132,10 @@ def creditpurchase(request):
         obj = CreditPurchaseRequest(credit= credit,paymentslip=paymentslip, amount=amount)
         obj.username=username
         obj.save()
-        return redirect('dashboard/')
-    return render(request,'creditpurchase.html')
-
-        
-
-
-
+        totalspending = utils.totalspending(username)
+        username=Profile.objects.get(username = username.username)
+        return render(request,"dashboard.html",{'username':username,'spending':totalspending,"success":1})
+    return redirect('/dashboard')
+    
 
 
