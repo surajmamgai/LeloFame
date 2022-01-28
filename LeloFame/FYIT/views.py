@@ -108,7 +108,7 @@ Price = {
         'credit': 120,
         'amount': 499
     },
-    'premium': {
+    'Premium': {
         'credit': 200,
         'amount': 999
     }
