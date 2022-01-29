@@ -16,6 +16,8 @@ class Profile(AbstractUser):
     email = models.EmailField(max_length = 254)
     password = models.CharField(max_length=100)
     credits =  models.IntegerField(default=0)
+    reffered_by = models.CharField(max_length=300,null=True,default="999999")
+    total_refferal = models.IntegerField(default=0)
 
     def Username(self, *args, **kwargs):
         a = self.username
@@ -80,3 +82,8 @@ class LeloFameRequest(models.Model):
 
 
 
+class Referral(models.Model):
+    username = models.ForeignKey(Profile,on_delete=models.CASCADE)
+    date = models.DateTimeField(default=timezone.now)
+    reffered_to = models.CharField(max_length=200)
+    now = models.CharField(max_length=50, null=True)

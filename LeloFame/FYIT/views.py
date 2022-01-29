@@ -1,6 +1,6 @@
+from logging import exception
 import re
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
 from FYIT import utils
 from .models import *
 from django.contrib.auth import authenticate, login, logout
@@ -9,12 +9,13 @@ def index(request):
     return render(request,"index.html")
 
 def dashboard(request):
-
     username = request.user
     if username.is_authenticated:
         totalspending = utils.totalspending(username)
         username=Profile.objects.get(username = username.username)
-        return render(request,"dashboard.html",{'username':username,'spending':totalspending})
+        referlink = "/signup?referral="+str(username)
+        
+        return render(request,"dashboard.html",{'username':username,'spending':totalspending, 'referallink':referlink})
     else:
        return redirect('login')
 
@@ -30,18 +31,40 @@ def signup(request):
         last_name = request.POST.get('lastname')
         email = request.POST.get('email')
         password = request.POST.get('password')
+        try:
+            reffer = request.POST.get('refferal')
+            print(reffer)
+            # objx = Profile.objects.get(username = reffer)
+            print("Adfsdaf")
+        except:
+            reffer = ""
+        if len(reffer)>0:
+            ob2 = Referral(reffered_to = id)
+            ob1 = Profile.objects.get(username = reffer)
+            ob2.username = ob1
+            ob2.save()
+            obj =Profile.objects.create_user(username = id, first_name=first_name,reffered_by=reffer, last_name=last_name, email = email,password = password, credits = 0)
+        else:
+            obj =Profile.objects.create_user(username = id, first_name=first_name,last_name=last_name, email = email,password = password, credits = 0)
 
-        obj =Profile.objects.create_user(username = id, first_name=first_name, last_name=last_name, email = email,password = password, credits = 0)
         password1 = request.POST.get('confirmpassword')
         if(password1!=password):
             p = "Password and Confirm Password doesn't matched!"
             return render(request,"signup.html",{'p':p})
         obj.save()
+        if reffer:
+            utils.totalrefferal(reffer)
         user = authenticate(request,username=id, password=password)
         if user is not None:
             login(request,user)
             return redirect('dashboard/')
-    return render(request,"signup.html",{'p':''})
+    try:
+        gett = request.GET['referral']
+        refferal_user = Profile.objects.get(username = gett)
+        
+    except:
+        gett = ""
+    return render(request,"signup.html",{'ref':gett})
 #login
 
 

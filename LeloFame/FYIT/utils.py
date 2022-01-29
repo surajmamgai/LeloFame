@@ -1,3 +1,4 @@
+from logging import exception
 import random
 from django.core.mail import send_mail
 from .models import *
@@ -73,3 +74,12 @@ def totalspending(username):
 
 
 
+def totalrefferal(username):
+    pass
+    try:
+        obj_refer = Referral.objects.filter(username=username).count
+        obj = Profile.objects.get(username = username)
+        obj.total_refferal=obj_refer
+        obj.save()
+    except:
+        return "adsf"
