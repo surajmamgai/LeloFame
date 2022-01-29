@@ -1,0 +1,48 @@
+{% load static %}
+    <!-- Drawer -->
+                <aside class="app-layout-drawer">
+
+                    <!-- Drawer scroll area -->
+                    <div class="app-layout-drawer-scroll">
+                        <!-- Drawer logo -->
+                        <div id="logo" class="drawer-header">
+                            <h2 style="text-align: center">$&nbsp;{{ request.user.wallet|floatformat:2 }}</h2>
+                        </div>
+                        <div style="height: auto" id="logo" class="drawer-header">
+                            <h2 style="font-size: 12px; text-align: center; margin: 0;">Mr/s. {{ request.user.name|truncatewords:2 }}({{user.username}})</h2>
+                        </div>
+
+                        <!-- Drawer navigation -->
+                        <nav class="drawer-main">
+                            <ul class="nav nav-drawer">
+                                {% if not request.user.is_superuser %}
+
+                                {% endif %}
+                                {% if request.user.is_superuser %}
+                                <li class="nav-item nav-drawer-header">Admin</li>
+
+                                <li class="nav-item">
+                                    <a href="/panel/"><i class="ion-ios-speedometer-outline"></i> Dashboard</a>
+                                </li>
+                                {% endif %}
+                                <li class="nav-item {% if '/panel/lelofame_request/' in request.get_full_path %}active{% endif %}">
+                                    <a href="/panel/lelofame_request/"><i class="ion-ios-bookmarks-outline"></i>LeloFame Request</a>
+                                </li>
+                                <li class="nav-item {% if '/panel/credit_purchase_request/' in request.get_full_path %}active{% endif %}">
+                                    <a href="/panel/credit_purchase_request/"><i class="ion-ios-paw-outline"></i>Credit Purchase Request</a>
+                                </li>
+                            </ul>
+                        </nav>
+                        <!-- End drawer navigation -->
+
+                        <div class="drawer-footer">
+                            <p class="copyright">&copy; LeloFame</p>
+                            <a href="/">Visit Us</a>
+                        </div>
+                    </div>
+                    <!-- End drawer scroll area -->
+                </aside>
+                <!-- End drawer -->
+
+
+        <div class="app-ui-mask-modal"></div>

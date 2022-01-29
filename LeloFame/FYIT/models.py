@@ -65,7 +65,7 @@ class CreditPurchaseLog(models.Model):
 
 class CreditPurchaseRequest(models.Model):
     username = models.ForeignKey(Profile, on_delete=models.CASCADE)
-    credit = models.IntegerField()
+    credit = models.IntegerField(default=0)
     amount = models.IntegerField()
     paymentslip = models.FileField(upload_to='paymentslip/',null=True)
     status = models.BooleanField(default=False)
