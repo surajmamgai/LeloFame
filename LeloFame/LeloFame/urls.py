@@ -15,9 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.views.static import serve
+from django.conf.urls import url
+from LeloFame import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('FYIT.urls')),
     path('panel/', include('panel.urls')),
+    url(r'^(?P<path>.*)$', serve, { 'document_root': settings.MEDIA_ROOT}), 
 ]

@@ -37,15 +37,17 @@
                                     <td><a href="{% if x.paymentslip %}{{ x.paymentslip.url }}{% endif %}" target="_blank"><img width="150px" style="max-height: 150px" src="{% if x.paymentslip %}{{ x.paymentslip.url }}{% endif %}"></a></td>
                                     <td>{{ x.status }}</td>
                                     <td class="text-center">
-                                        <form onSubmit="if(!confirm('Are you sure?')){return false;}" style="float: right;" method="POST" action="/panel/approve/">
+                                        <form onSubmit="if(!confirm('Are you sure?')){return false;}" style="float: right;" method="POST" action="/panel/approve_c/">
                                             {% csrf_token %}
                                             <div class="btn-group">
-                                                <input type="hidden" name="user" value= {{ x.username }}>
+                                                <input type="hidden" name="username" value= {{ x.username }}>
+                                                <input type="hidden" name="amount" value= {{ x.amount }}>
+                                                <input type="hidden" name="credit" value= {{ x.credit }}>
                                                 <input type="hidden" name="approve">
                                                 <button class="btn btn-xs btn-default" type="submit" data-toggle="tooltip" title="Approve"><i style="color: green" class="ion-checkmark-circled"></i></button>
                                             </div>
                                         </form>
-                                        <form onSubmit="if(!confirm('Are you sure?')){return false;}" style="float: right;" method="POST" action ="/panel/reject/">
+                                        <form onSubmit="if(!confirm('Are you sure?')){return false;}" style="float: right;" method="POST" action ="/panel/reject_c/">
                                             {% csrf_token %}
                                             <div class="btn-group">
                                                 <input type="hidden" name="user" value= {{ x.username }}>

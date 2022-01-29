@@ -15,16 +15,11 @@
                         <!-- Drawer navigation -->
                         <nav class="drawer-main">
                             <ul class="nav nav-drawer">
-                                {% if not request.user.is_superuser %}
-
-                                {% endif %}
-                                {% if request.user.is_superuser %}
                                 <li class="nav-item nav-drawer-header">Admin</li>
 
                                 <li class="nav-item">
                                     <a href="/panel/"><i class="ion-ios-speedometer-outline"></i> Dashboard</a>
                                 </li>
-                                {% endif %}
                                 <li class="nav-item {% if '/panel/lelofame_request/' in request.get_full_path %}active{% endif %}">
                                     <a href="/panel/lelofame_request/"><i class="ion-ios-bookmarks-outline"></i>LeloFame Request</a>
                                 </li>
