@@ -133,6 +133,18 @@
             Name:
             <a href="#" class="d-block">{{username.Name}}</a>
           </div>
+          
+        </div>
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+          <div class="image">
+
+            <!-- <img src="{% static 'dist/img/user2-160x160.jpg' %}" class="img-circle elevation-2" alt="User Image"> -->
+          </div>
+          <div class="info">
+            Referral URL:
+            <a href={{ referallink }} class="d-block">{{ request.path.home }} {{ referallink }}</a>
+          </div>
+          
         </div>
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
           <div class="image">
@@ -3349,22 +3361,34 @@
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Payment Gate</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
               <div class="modal-body">
-                <img src="{% static 'qrcode.jpeg' %}" style="height: 100%;
-                width: 100%;
+                <img src="{% static 'qrcode.jpeg' %}" style="height: 80%;
+                width: 80%; align-items: center; justify-content: center;display: flex;margin: auto;
                 object-fit: cover;" alt="UPI-ID: 8750578258@paytm">
                 <form action="/creditpurchase" enctype="multipart/form-data" method="post">
                   {% csrf_token %}
                   <input type="text" name="plan-credit" id="plan" value="" hidden>
-                  <input type="file" class='file' name="paymentslip" placeholder="Upload the Payment Receipt">
+                  <div class="input-group mt-4">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="inputGroupFileAddon01" style="background-color: #4fd8fe; color: white; font-weight: bolder;">Upload</span>
+                    </div>
+                    <div class="custom-file">
+                      <input type="file" class=" file " required name="paymentslip" id="inputGroupFile01"
+                        aria-describedby="inputGroupFileAddon01"/>
+                      <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                    </div>
+                  </div>
+                  
+                  <!-- <input type="file" class='file' name="paymentslip" placeholder="Upload the Payment Receipt"> -->
                   <div>
-                  <label for="TRANS">Transaction id</label>
-                  <input type="text" name="trans" placeholder="Transaction Id" >
+                   
+                  <!-- <label for="TRANS">Transaction id</label>
+                  <input type="text" name="trans" placeholder="Transaction Id" > -->
               </div></div>
               <div class="modal-footer">
                 <button type="submit" name = "plan" class="btn btn-secondary">Purchase</button>
@@ -3387,7 +3411,7 @@
                   <span></span>299<sup>₹</sup>
                   <p class="month">250 Credits</p>
                 </div>
-                <div class="price" style="margin-top: -60px;">
+                <div class="price mb-5" style="margin-top: -60px;">
                   <button  type="button"  onclick="myfun('basic')" data-toggle="modal" id="planbutton" data-target="#QRCODE">PURCHASE</button>
                   <script>
                     function myfun(x){
@@ -3406,8 +3430,8 @@
                   <span></span>499<sup>₹</sup>
                   <p class="month">500 Credits</p>
                 </div>
-                <div class="price" style="margin-top: -60px;">
-                  <button class="price" type="button" data-toggle="modal" onclick="myfun('prime')" data-target="#QRCODE">PURCHASE</button>
+                <div class="price mb-5" style="margin-top: -60px;">
+                  <button type="button" data-toggle="modal" onclick="myfun('prime')" data-target="#QRCODE">PURCHASE</button>
                 </div>
               </div>
             </form>
@@ -3421,9 +3445,9 @@
                   <span></span>999<sup>₹</sup>
                   <p class="month">1200 Credits</p>
                 </div>
-                <div class="price" style="margin-top: -60px;">
+                <div class="price mb-5" style="margin-top: -60px;">
 
-                  <button class="price" type="button" data-toggle="modal" onclick="myfun('premium')" data-target="#QRCODE">PURCHASE</button>
+                  <button  type="button" data-toggle="modal" onclick="myfun('premium')" data-target="#QRCODE">PURCHASE</button>
                 </div>
               </div>
             </form>

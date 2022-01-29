@@ -59,8 +59,29 @@
                             <!-- <h5>Email Id</h5> -->
                             <input class="input" placeholder="Email Id"  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Must be in the pattern of Mail." name="email" type="text" required>
                         </div>
+                        
                     </div>
-                   
+                    {% if ref %}
+                    <div class="input-div one">
+                        <div class="i">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div>
+                            <!-- <h5>Email Id</h5> -->
+                            <input class="input" placeholder="Refferel Id"  title="Must be in the pattern of Mail." name="refferal" value= {{ ref }} type="text">
+                        </div>
+                    </div>
+                    {% else %}
+                    <div class="input-div one">
+                        <div class="i">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div>
+                            <!-- <h5>Email Id</h5> -->
+                            <input class="input" placeholder="Refferel Id"  title="Must be in the pattern of Mail." name="refferal" type="text" >
+                        </div>
+                    </div>
+                    {% endif %}
                       <div class="input-div two">
                           <div class="i">
                               <i class="fas fa-lock"></i>
