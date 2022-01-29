@@ -13,4 +13,5 @@ urlpatterns = [
     path('creditpurchases',views.creditpurchases),
     # path('planrequest', views.planrequest),
     path('creditpurchase', views.creditpurchase, name ='creditpurchase'),
+    
 ]
