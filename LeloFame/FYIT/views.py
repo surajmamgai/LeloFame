@@ -52,7 +52,7 @@ def signup(request):
             p = "Password and Confirm Password doesn't matched!"
             return render(request,"signup.html",{'p':p})
         obj.save()
-        if reffer:
+        if len(reffer)>0:
             utils.totalrefferal(reffer)
         user = authenticate(request,username=id, password=password)
         if user is not None:
