@@ -67,6 +67,7 @@ def approve_c(request):
             obj.save()
             return redirect('/panel/credit_purchase_request/')
         except Exception as e:
+            print(e)
             return redirect('/panel/credit_purchase_request/')
     return redirect('/panel/credit_purchase_request/')
 

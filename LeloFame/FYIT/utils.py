@@ -46,9 +46,10 @@ def creditpurchaselog(txn,username,amount,credit,date):
     obj = Profile.objects.get(username=username)
     credit=int(credit)
     amount=int(amount)
-    obj2 = CreditPurchaseLog(txn=txn,date=date,redit_previous_balanace=obj.credits,credit_new_balance = obj.credits+credit,credit_value=credit,amount = amount)
+    obj2 = CreditPurchaseLog(txn=txn,credit_previous_balanace=obj.credits,credit_new_balance = obj.credits+credit,credit_value=credit,amount = amount)
     obj.credits = obj.credits+credit
     obj2.username = obj
+    obj.save()
     obj2.save()
 
 def lelofamerequestpossible(username, credit):
