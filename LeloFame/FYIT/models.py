@@ -18,6 +18,7 @@ class Profile(AbstractUser):
     credits =  models.IntegerField(default=0)
     reffered_by = models.CharField(max_length=300,null=True,default="999999")
     total_refferal = models.IntegerField(default=0)
+    reedemed_refferal = models.IntegerField(default=0)
 
     def Username(self, *args, **kwargs):
         a = self.username

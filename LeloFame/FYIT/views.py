@@ -124,7 +124,8 @@ def lelofamerequest(request):
         obj.save()   
         totalspending = utils.totalspending(username)
         username=Profile.objects.get(username = username.username)
-        return render(request,"dashboard.html",{'username':username,'spending':totalspending,"success":1})    
+        referlink = "/signup?referral="+str(username)
+        return render(request,"dashboard.html",{'username':username,'spending':totalspending,"success":1,'referallink':referlink})    
     return redirect('dashboard/')
 
 Price = {
