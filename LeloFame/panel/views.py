@@ -19,12 +19,13 @@ def lelofame_request(request):
 
 def approve_l(request):
     if request.method =='POST':
+        txn = request.POST.get('txn')
         username = request.POST.get('username')
         amount = request.POST.get('amount')
         credit = request.POST.get('credit')
         try:
             utils.creditpurchaselog(username,amount,credit)
-            obj = CreditPurchaseRequest.objects.get(username = username)
+            obj = CreditPurchaseRequest.objects.get(txn = txn)
             obj.status=1
             obj.save()
             return redirect('/panel/credit_purchase_request/')
@@ -34,11 +35,12 @@ def approve_l(request):
 
 def reject_l(request):
     if request.method =='POST':
+        txn = request.POST.get('txn')
         username = request.POST.get('username')
         amount = request.POST.get('amount')
         credit = request.POST.get('credit')
         try:
-            obj = CreditPurchaseRequest.objects.get(username = username)
+            obj = CreditPurchaseRequest.objects.get(txn = txn)
             obj.status=2
             obj.save()
             return redirect('/panel/credit_purchase_request/')
@@ -48,26 +50,29 @@ def reject_l(request):
 
 def approve_c(request):
     if request.method =='POST':
+        txn = request.POST.get('txn')
         username = request.POST.get('username')
         amount = request.POST.get('amount')
         credit = request.POST.get('credit')
+        print(request.POST)
         try:
-            utils.creditpurchaselog(username,amount,credit)
-            obj = CreditPurchaseRequest.objects.get(username = username)
+            utils.creditpurchaselog(txn,username,amount,credit)
+            obj = CreditPurchaseRequest.objects.get(txn=txn)
             obj.status=1
             obj.save()
             return redirect('/panel/credit_purchase_request/')
-        except:
+        except Exception as e:
             return redirect('/panel/credit_purchase_request/')
     return redirect('/panel/credit_purchase_request/')
 
 def reject_c(request):
     if request.method =='POST':
+        txn = request.POST.get('txn')
         username = request.POST.get('username')
         amount = request.POST.get('amount')
         credit = request.POST.get('credit')
         try:
-            obj = CreditPurchaseRequest.objects.get(username = username)
+            obj = CreditPurchaseRequest.objects.get(txn=txn)
             obj.status=2
             obj.save()
             return redirect('/panel/credit_purchase_request/')

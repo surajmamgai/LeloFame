@@ -13,7 +13,14 @@ def generateuser():
         return str(r)
     u = generateuser()
 
-
+def generate_txn():
+    r = random.randint(10000001,99999998)
+    u = CreditPurchaseRequest.objects.filter(txn = r).count()+LeloFameRequest.objects.filter(txn = r).count()
+    if u > 0:
+        generate_txn()
+    else:
+        return str(r)
+    u = generate_txn()
 
 def left_credit(user,to_deduct):
     obj = Profile.objects.get(id=user)
@@ -35,11 +42,14 @@ def send_mail_function(name,email,subject,message):
     send_mail('LELOFAME',mess,'lelo.fame.12@gmail.com',[email],fail_silently=False,)
 
 
-def creditpurchaselog(username,amount,credit):
+def creditpurchaselog(txn,username,amount,credit):
     obj = Profile.objects.get(username=username)
-    obj2 = CreditPurchaseLog(credit_previous_balanace=obj.Credit(),credit_new_balance = obj.Credit()+credit,credit_value=credit,amount = amount)
-    obj.credits = obj.Credit()+credit
-    obj2.username = username
+    credit=int(credit)
+    amount=int(amount)
+    obj2 = CreditPurchaseLog(txn=txn,credit_previous_balanace=obj.credits,credit_new_balance = obj.credits+credit,credit_value=credit,amount = amount)
+    obj.credits = obj.credits+credit
+    obj2.username = obj
+    print(obj2.username)
     obj.save()
     obj2.save()
 

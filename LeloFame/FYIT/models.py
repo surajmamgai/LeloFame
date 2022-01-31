@@ -48,6 +48,7 @@ class Profile(AbstractUser):
     
 
 class LeloFameLog(models.Model):
+    txn = models.CharField(max_length=10,primary_key=True)
     username = models.ForeignKey(Profile, on_delete=models.CASCADE)
     credit_spends = models.IntegerField()
     platform = models.CharField(max_length=200)                  # facebook, instagram, youtube etc.
@@ -58,6 +59,7 @@ class LeloFameLog(models.Model):
     plan = models.CharField(max_length=300)
 
 class CreditPurchaseLog(models.Model):
+    txn = models.CharField(max_length=10,primary_key=True)
     username = models.ForeignKey(Profile, on_delete=models.CASCADE)
     credit_previous_balanace = models.IntegerField()
     credit_new_balance = models.IntegerField()
@@ -66,19 +68,21 @@ class CreditPurchaseLog(models.Model):
     date = models.DateTimeField(default=timezone.now)          #date of purchase
 
 class CreditPurchaseRequest(models.Model):
+    txn = models.CharField(max_length=10,primary_key=True)
     username = models.ForeignKey(Profile, on_delete=models.CASCADE)
     credit = models.IntegerField(default=0)
     amount = models.IntegerField()
     paymentslip = models.FileField(upload_to='paymentslip/',null=True)
-    status = models.BooleanField(default=False)
+    status = models.IntegerField(default=0)
 
 class LeloFameRequest(models.Model):
+    txn = models.CharField(max_length=10,primary_key=True)
     username = models.ForeignKey(Profile, on_delete=models.CASCADE)
     userhandle = models.CharField(max_length=200)              # platform user username like instagram username facebook username etc
     platform = models.CharField(max_length=200)                 # platform like instagram 
     type = models.CharField(max_length=200)                     # like followers etc
     plan = models.CharField(max_length=300)                  # package the user selected
-    status = models.BooleanField(default=False)
+    status = models.IntegerField(default=0)
 
 
 

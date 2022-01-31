@@ -112,13 +112,14 @@ def lelofamerequest(request):
     if request.method == 'POST':
         # print(request.POST)
         userhandle = request.POST.get('userhandle')
+        txn=utils.generate_txn()
         platform = request.POST.get('platform')
         type = request.POST.get('type')
         plan=request.POST.get('plan')
 
         username = Profile.objects.get(username = user)
         # plan = LeloFamePlan[platform][type][plan]
-        obj=LeloFameRequest(userhandle=userhandle,platform=platform,type=type,plan=plan)
+        obj=LeloFameRequest(txn=txn,userhandle=userhandle,platform=platform,type=type,plan=plan)
         obj.username = username
         obj.save()   
         totalspending = utils.totalspending(username)
@@ -148,11 +149,12 @@ def creditpurchase(request):
     if request.method == 'POST':
         print(request.POST)
         plan= request.POST.get('plan-credit')
+        txn=utils.generate_txn()
         credit = Price[plan]["credit"]
         amount = Price[plan]["amount"]
         paymentslip = request.FILES.get('paymentslip')
         username=Profile.objects.get(username = username)
-        obj = CreditPurchaseRequest(credit= credit,paymentslip=paymentslip, amount=amount)
+        obj = CreditPurchaseRequest(txn=txn,credit= credit,paymentslip=paymentslip,amount=amount)
         obj.username=username
         obj.save()
         totalspending = utils.totalspending(username)

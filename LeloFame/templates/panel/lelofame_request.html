@@ -18,6 +18,7 @@
                             <thead>
                                 <tr>
                                     <th></th>
+                                    <th>Txn ID</th>
                                     <th>Username</th>
                                     <th>Credit Spendings</th>
                                     <th>Credit Balance</th>
@@ -32,6 +33,7 @@
                                 {% for x in u %}
                                 <tr style="background-color: {% if x.approved == None %}#ffc10740{% elif x.approved == False %}#ff000040{% else %}#00ff0040;{% endif %}">
                                     <td>{{ forloop.counter }}</td>
+                                    <td>{{ x.txn }}</td>
                                     <td>{{ x.username }}</td>
                                     <td>{{ x.credit_spends }}</td>
                                     <td>{{ x.credit_left }}</td>
@@ -41,7 +43,7 @@
                                     <td>{{ x.userhandle }}</td>
                                     <td>{{ x.date }}</td>
                                     <td class="text-center">
-                                        <form onSubmit="if(!confirm('Are you sure?')){return false;}" style="float: right;" method="POST" action="/panel/approve_l/">
+                                        <form  style="float: right;" method="POST" action="/panel/approve_l/">
                                             {% csrf_token %}
                                             <div class="btn-group">
                                                 <input type="hidden" name="user" value="{{x.user}}">
@@ -49,7 +51,7 @@
                                                 <button class="btn btn-xs btn-default" type="submit" data-toggle="tooltip" title="Approve"><i style="color: green" class="ion-checkmark-circled"></i></button>
                                             </div>
                                         </form>
-                                        <form onSubmit="if(!confirm('Are you sure?')){return false;}" style="float: right;" method="POST" action="/panel/reject_l/">
+                                        <form style="float: right;" method="POST" action="/panel/reject_l/">
                                             {% csrf_token %}
                                             <div class="btn-group">
                                                 <input type="hidden" name="user" value="{{x.user}}">
