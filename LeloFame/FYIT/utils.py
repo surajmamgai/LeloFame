@@ -42,33 +42,33 @@ def send_mail_function(name,email,subject,message):
     send_mail('LELOFAME',mess,'lelo.fame.12@gmail.com',[email],fail_silently=False,)
 
 
-def creditpurchaselog(txn,username,amount,credit):
+def creditpurchaselog(txn,username,amount,credit,date):
     obj = Profile.objects.get(username=username)
     credit=int(credit)
     amount=int(amount)
     obj2 = CreditPurchaseLog(txn=txn,credit_previous_balanace=obj.credits,credit_new_balance = obj.credits+credit,credit_value=credit,amount = amount)
     obj.credits = obj.credits+credit
     obj2.username = obj
-    print(obj2.username)
     obj.save()
     obj2.save()
 
 def lelofamerequestpossible(username, credit):
+    credit=int(credit)
     obj = Profile.objects.get(username = username)
-    if obj.Credit()<credit:
+    if obj.credit<credit:
         return False
     else:
         return True
 
 
 
-def lelofamelog(username, userhandle, credit,platform, type, plan):
+def lelofamelog(txn,username, userhandle, credit,platform, type, plan):
     obj = Profile.objects.get(username = username)
     if lelofamerequestpossible(username,credit)==False:
         return False
-    obj2 = LeloFameLog(credit_spends=credit,platform=platform,type=type,userhandle=userhandle,plan=plan,credit_left=obj.Credit()-credit)
-    obj.credits = obj.Credit()-credit
-    obj2.username = username
+    obj2 = LeloFameLog(txn=txn,credit_spends=credit,platform=platform,type=type,userhandle=userhandle,plan=plan,credit_left=obj.credit-credit)
+    obj.credits = obj.credit-credit
+    obj2.username = obj
     obj2.save()
     return True
 

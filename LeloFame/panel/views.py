@@ -1,3 +1,5 @@
+from platform import platform
+from pydoc import plain
 from django.shortcuts import render,redirect
 from FYIT.models import *
 from FYIT import utils
@@ -21,32 +23,34 @@ def approve_l(request):
     if request.method =='POST':
         txn = request.POST.get('txn')
         username = request.POST.get('username')
-        amount = request.POST.get('amount')
-        credit = request.POST.get('credit')
+        credit_spends = request.POST.get('credit_spends')
+        credit_left = request.POST.get('credit_left')
+        platform = request.POST.get('platform')
+        type = request.POST.get('type')
+        plan = request.POST.get('plan')
+        userhandle = request.POST.get('userhandle')
+        date = request.POST.get('date')
         try:
-            utils.creditpurchaselog(username,amount,credit)
-            obj = CreditPurchaseRequest.objects.get(txn = txn)
+            utils.lelofamelog(txn,username, userhandle, credit_spends,platform, type, plan)
+            obj = LeloFameRequest.objects.get(txn = txn)
             obj.status=1
             obj.save()
-            return redirect('/panel/credit_purchase_request/')
+            return redirect('/panel/lelofame_request/')
         except:
-            return redirect('/panel/credit_purchase_request/')
-    return redirect('/panel/credit_purchase_request/')
+            return redirect('/panel/lelofame_request/')
+    return redirect('/panel/lelofame_request/')
 
 def reject_l(request):
     if request.method =='POST':
         txn = request.POST.get('txn')
-        username = request.POST.get('username')
-        amount = request.POST.get('amount')
-        credit = request.POST.get('credit')
         try:
-            obj = CreditPurchaseRequest.objects.get(txn = txn)
+            obj = LeloFameRequest.objects.get(txn = txn)
             obj.status=2
             obj.save()
-            return redirect('/panel/credit_purchase_request/')
+            return redirect('/panel/lelofame_request/')
         except:
-            return redirect('/panel/credit_purchase_request/')
-    return redirect('/panel/credit_purchase_request/')
+            return redirect('/panel/lelofame_request/')
+    return redirect('/panel/lelofame_request/')
 
 def approve_c(request):
     if request.method =='POST':
@@ -54,23 +58,22 @@ def approve_c(request):
         username = request.POST.get('username')
         amount = request.POST.get('amount')
         credit = request.POST.get('credit')
+        date = request.POST.get('date')
         print(request.POST)
         try:
-            utils.creditpurchaselog(txn,username,amount,credit)
+            utils.creditpurchaselog(txn,username,amount,credit,date)
             obj = CreditPurchaseRequest.objects.get(txn=txn)
             obj.status=1
             obj.save()
             return redirect('/panel/credit_purchase_request/')
         except Exception as e:
+            print(e)
             return redirect('/panel/credit_purchase_request/')
     return redirect('/panel/credit_purchase_request/')
 
 def reject_c(request):
     if request.method =='POST':
         txn = request.POST.get('txn')
-        username = request.POST.get('username')
-        amount = request.POST.get('amount')
-        credit = request.POST.get('credit')
         try:
             obj = CreditPurchaseRequest.objects.get(txn=txn)
             obj.status=2
