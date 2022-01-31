@@ -82,3 +82,14 @@ def totalrefferal(username):
         obj.save()
     except:
         return "adsf"
+
+def creditbenifit(username):
+    count = Referral.objects.filter(username = username).count()
+    obj = Profile.objects.get(username = username)
+    if count >=10:
+        obj.credit = obj.credit + 50
+        obj.reedemed_refferal = obj.reedemed_refferal + 10
+        obj.total_refferal = obj.total_refferal - 10
+        obj.save()
+    else:
+        return 
