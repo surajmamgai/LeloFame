@@ -46,8 +46,15 @@
                                         <form  style="float: right;" method="POST" action="/panel/approve_l/">
                                             {% csrf_token %}
                                             <div class="btn-group">
-                                                <input type="hidden" name="user" value="{{x.user}}">
-                                                <input type="hidden" name="approve">
+                                                <input type="hidden" name="txn" value="{{x.txn}}">
+                                                <input type="hidden" name="username" value="{{x.username}}">
+                                                <input type="hidden" name="credit_spends" value="{{x.credit_spends}}">
+                                                <input type="hidden" name="credit_left" value="{{x.credit_left}}">
+                                                <input type="hidden" name="platform" value="{{x.platform}}">
+                                                <input type="hidden" name="type" value="{{x.type}}">
+                                                <input type="hidden" name="plan" value="{{x.plan}}">
+                                                <input type="hidden" name="userhandle" value="{{x.userhandle}}">
+                                                <input type="hidden" name="date" value="{{x.date}}">
                                                 <button class="btn btn-xs btn-default" type="submit" data-toggle="tooltip" title="Approve"><i style="color: green" class="ion-checkmark-circled"></i></button>
                                             </div>
                                         </form>
