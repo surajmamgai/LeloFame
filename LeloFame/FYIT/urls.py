@@ -4,13 +4,13 @@ from FYIT import views
 
 urlpatterns = [ 
     path('',views.index,name='index'),
-    path('dashboard/',views.dashboard),
+    path('dashboard/',views.dashboard,name = 'dashboard'),
     path('login', views.loginn,name='login'),
-    path('signup',views.signup),
-    path('contact_us',views.mail),
-    path('lelofamerequest', views.lelofamerequest),
-    path('logout',views.logoutt),
-    path('creditpurchases',views.creditpurchases),
+    path('signup',views.signup, name = 'signup'),
+    path('contact_us',views.mail, name='contact_us'),
+    path('lelofamerequest', views.lelofamerequest, name = 'lelofamerequest'),
+    path('logout',views.logoutt, name='logout'),
+    path('creditpurchases',views.creditpurchases, name= 'creditpurchases'),
     # path('planrequest', views.planrequest),
     path('creditpurchase', views.creditpurchase, name ='creditpurchase'),
     

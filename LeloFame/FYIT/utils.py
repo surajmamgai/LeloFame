@@ -4,6 +4,7 @@ from django.core.mail import send_mail
 from .models import *
 
 
+
 def generateuser():
     r = random.randint(10000001,99999998)
     u = Profile.objects.filter(username = r).count()
