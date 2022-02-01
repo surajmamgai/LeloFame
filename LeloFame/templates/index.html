@@ -59,11 +59,11 @@
           </li> {% endcomment %}
           <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
           {% if request.user.is_authenticated %}
-          <li><a class="getstarted scrollto" href="/dashboard">Dashboard</a></li>
-          <li><a class="getstarted scrollto" href="/logout">Sign Out</a></li>
+          <li><a class="getstarted scrollto" href="{% url 'dashboard' %}">Dashboard</a></li>
+          <li><a class="getstarted scrollto" href="{% url 'logout' %}">Sign Out</a></li>
           {% else %}
-          <li><a class="getstarted scrollto" href="/login">Sign In</a></li>
-          <li><a class="getstarted scrollto" href="/signup">Sign Up</a></li>
+          <li><a class="getstarted scrollto" href="{% url 'login' %}">Sign In</a></li>
+          <li><a class="getstarted scrollto" href="{% url 'signup' %}">Sign Up</a></li>
           {% endif %}
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
@@ -152,7 +152,7 @@
             <p>
               We have changed the life of thousands, now it's your turn to come up and be the famous personality among your peers.
             </p>
-            <a href="#" class="btn-learn-more">Learn More</a>
+            <a href="{% url 'index' %}" class="btn-learn-more">Learn More</a>
           </div>
         </div>
 
