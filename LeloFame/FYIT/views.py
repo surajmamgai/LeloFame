@@ -54,6 +54,7 @@ def signup(request):
         obj.save()
         if len(reffer)>0:
             utils.totalrefferal(reffer)
+            utils.creditbenifit(reffer)
         user = authenticate(request,username=id, password=password)
         if user is not None:
             login(request,user)

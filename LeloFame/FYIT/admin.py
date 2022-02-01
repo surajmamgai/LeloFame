@@ -1,10 +1,14 @@
 from django.contrib import admin
+from django.db.models.functions import Upper, Lower
 # Register your models here.
 from .models import *
 
 class ProfileLog(admin.ModelAdmin):
-    list_display = ['username','name','first_name', 'last_name', 'reffered_by','total_refferal', 'email', 'credits']
+    list_display = ['username','name','first_name', 'last_name', 'reffered_by','total_refferal','reedemed_refferal', 'email', 'credits']
     search_fields = ('username','name','first_name', 'last_name', 'email', 'credits')
+    ordering = ['-date_joined']
+    # def get_ordering(self, request):
+    #     return [Upper('date_joined')]
 admin.site.register(Profile,ProfileLog)
 
 class LeloFame(admin.ModelAdmin):

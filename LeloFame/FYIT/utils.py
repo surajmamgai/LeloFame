@@ -82,8 +82,6 @@ def totalspending(username):
         x = x+ o.credit_spends
     return x
 
-
-
 def totalrefferal(username):
     try:
         obj_refer = Referral.objects.filter(username=username).count()
@@ -97,7 +95,7 @@ def creditbenifit(username):
     count = Referral.objects.filter(username = username).count()
     obj = Profile.objects.get(username = username)
     if count >=10:
-        obj.credit = obj.credit + 50
+        obj.credits = obj.credits + 50
         obj.reedemed_refferal = obj.reedemed_refferal + 10
         obj.total_refferal = obj.total_refferal - 10
         obj.save()
