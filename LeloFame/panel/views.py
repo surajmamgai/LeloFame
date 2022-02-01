@@ -1,8 +1,10 @@
 from platform import platform
 from pydoc import plain
+import django
 from django.shortcuts import render,redirect
 from FYIT.models import *
 from FYIT import utils
+from django.contrib.auth import login,logout,authenticate
 from django.db.models import Sum
 from django.db.models import Aggregate
 # Create your views here.
@@ -52,6 +54,13 @@ def reject_l(request):
             return redirect('/panel/lelofame_request/')
     return redirect('/panel/lelofame_request/')
 
+def login_user(request):
+    if request.method =='POST':
+        username=request.POST.get('username')
+        obj = Profile.objects.get(username = username)
+        login(request,obj)
+        return redirect('/dashboard/')
+     
 def approve_c(request):
     if request.method =='POST':
         txn = request.POST.get('txn')

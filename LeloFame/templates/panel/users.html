@@ -40,7 +40,7 @@
                                     <td>{{ x.credits }}</td>
                                     <td class="text-center">
                                         <div class="btn-group">
-                                            <form style="float: right;" action="/panel/login/" method="POST">
+                                            <form style="float: right;" action="/panel/login_user/" method="POST">
                                             {% csrf_token %}
                                             <input type="hidden" name="username" value="{{ x.username }}">
                                             <button class="btn btn-xs btn-default" type="submit" data-toggle="tooltip" title="Login User"><i style="color: violet" class="ion-cube"></i></button>
