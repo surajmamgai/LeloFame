@@ -1,3 +1,4 @@
+from csv import list_dialects
 from django.contrib import admin
 from django.db.models.functions import Upper, Lower
 # Register your models here.
@@ -35,3 +36,13 @@ class Reff(admin.ModelAdmin):
     list_display = ['username', 'date', 'reffered_to']
     search_fields = ('username', 'date', 'reffered_to')  
 admin.site.register(Referral, Reff)
+
+class CredStat(admin.ModelAdmin):
+    list_display = ['username', 'comment','plan','date','credit', 'amount', 'status']
+    search_fields = ('username', 'comment','plan','date','credit', 'amount', 'status')
+admin.site.register(CreditStatement,CredStat)
+
+class LeloStat(admin.ModelAdmin):
+    list_display = ['username', 'comment','plan','platform','date','type', 'price', 'status']
+    search_fields = ('username', 'comment','plan','platform','date','type', 'price', 'status')
+admin.site.register(LeloFameStatement,LeloStat)

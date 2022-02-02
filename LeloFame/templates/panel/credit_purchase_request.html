@@ -24,6 +24,7 @@
                                     <th>Amount</th>
                                     <th>Date</th>
                                     <th>Payment Slip</th>
+                                    <th>Comments</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -38,6 +39,7 @@
                                     <td>{{ x.amount }}</td>
                                     <td>{{ x.date }}</td>
                                     <td><a href="{% if x.paymentslip %}{{ x.paymentslip.url }}{% endif %}" target="_blank"><img width="150px" style="max-height: 150px" src="{% if x.paymentslip %}{{ x.paymentslip.url }}{% endif %}"></a></td>
+                                    <td><input type="text" name = "comment" /></td>
                                     <td class="text-center">
                                         <form style="float: right;" method="POST" action="/panel/approve_c/">
                                             {% csrf_token %}
