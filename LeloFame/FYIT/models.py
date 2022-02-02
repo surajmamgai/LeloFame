@@ -1,5 +1,7 @@
 from lib2to3.pytree import Base
 from pyexpat import model
+from statistics import mode
+from tkinter import CASCADE
 from unittest.util import _MAX_LENGTH
 from django.db import models
 from django.contrib.auth.models import AbstractUser, PermissionsMixin, BaseUserManager
@@ -73,6 +75,7 @@ class CreditPurchaseRequest(models.Model):
     username = models.ForeignKey(Profile, on_delete=models.CASCADE)
     credit = models.IntegerField(default=0)
     amount = models.IntegerField()
+    date = models.DateTimeField(default=timezone.now)
     paymentslip = models.FileField(upload_to='paymentslip/',null=True)
     status = models.IntegerField(default=0)
 
@@ -84,6 +87,7 @@ class LeloFameRequest(models.Model):
     type = models.CharField(max_length=200)                     # like followers etc
     plan = models.CharField(max_length=300)                  # package the user selected
     status = models.IntegerField(default=0)
+    date = models.DateTimeField(default=timezone.now)
 
 
 
@@ -92,3 +96,24 @@ class Referral(models.Model):
     date = models.DateTimeField(default=timezone.now)
     reffered_to = models.CharField(max_length=200)
     now = models.CharField(max_length=50, null=True)
+
+
+
+class CreditStatement(models.Model):
+    username = models.ForeignKey(Profile,on_delete=models.CASCADE)
+    comment = models.CharField(max_length=300)
+    plan = models.CharField(max_length=50)
+    date = models.DateTimeField(default=timezone.now)
+    credit = models.IntegerField()
+    amount = models.IntegerField()
+    status = models.CharField(max_length=50)
+
+class LeloFameStatement(models.Model):
+    username = models.ForeignKey(Profile,on_delete=models.CASCADE)
+    comment = models.CharField(max_length=300)
+    plan = models.CharField(max_length=50)
+    platform = models.CharField(max_length=100)
+    type = models.CharField(max_length=100)
+    price = models.IntegerField()
+    date = models.DateTimeField(default=timezone.now)
+    status = models.CharField(max_length=50)

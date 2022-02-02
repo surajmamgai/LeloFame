@@ -67,13 +67,15 @@ def approve_c(request):
         username = request.POST.get('username')
         amount = request.POST.get('amount')
         credit = request.POST.get('credit')
+        comment = request.POST.get('comment')
         date = request.POST.get('date')
-        print(request.POST)
+        # print(request.POST)
         try:
             utils.creditpurchaselog(txn,username,amount,credit,date)
             obj = CreditPurchaseRequest.objects.get(txn=txn)
             obj.status=1
             obj.save()
+            utils.creditstatement(username,"Approve",amount,credit,amount+credit,comment)
             return redirect('/panel/credit_purchase_request/')
         except Exception as e:
             print(e)
@@ -83,10 +85,16 @@ def approve_c(request):
 def reject_c(request):
     if request.method =='POST':
         txn = request.POST.get('txn')
+        username = request.POST.get('username')
+        amount = request.POST.get('amount')
+        credit = request.POST.get('credit')
+        comment = request.POST.get('comment')
+        date = request.POST.get('date')
         try:
             obj = CreditPurchaseRequest.objects.get(txn=txn)
             obj.status=2
             obj.save()
+            utils.creditstatement(username,"Reject",amount,credit,amount+credit,comment)
             return redirect('/panel/credit_purchase_request/')
         except:
             return redirect('/panel/credit_purchase_request/')

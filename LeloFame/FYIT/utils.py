@@ -102,3 +102,36 @@ def creditbenifit(username):
         obj.save()
     else:
         return 
+
+def creditstatement(username, status, amount, credit, plan, comment):
+    obj = CreditStatement()
+    obp = Profile.objects.get(username = username)
+    obj.username = obp
+    obj.credit = credit
+    obj.amount = amount
+    obj.status = status
+    obj.plan = plan
+    obj.comment = comment
+    obj.save()
+
+def lelofamestatement(username,comment, plan, platform, type, price,status):
+    obj = LeloFameStatement()
+    obp = Profile.objects.get(username = username)
+    obj.username = obp
+    obj.comment = comment
+    obj.plan = plan
+    obj.platform = platform
+    obj.type = type
+    obj.price = price
+    obj.status =status
+    obj.save()
+
+def credit_state(username):
+    obj = CreditStatement.objects.filter(username = username)
+    return obj
+
+def lelofame_state(username):
+    obj = LeloFameStatement.objects.filter(username = username)
+    return obj
+
+
