@@ -54,27 +54,31 @@
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLabel">LeloFame Request</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
+            <button type="button" class="close" onclick="closemodal()" data-dismiss="modal" aria-hidden="true">&times;</button>
           </div>
           <div class="modal-body">
             Your Request Has Been Submitted Successfully.
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-secondary" onclick="closemodal()" data-dismiss="modal">Close</button>
           </div>
         </div>
       </div>
     </div>
+
     {% if success %}
     <script type="text/javascript">
       $(document).ready(function () {
         $("#exampleModal").modal('show');
       });
     </script>
-
     {% endif %}
+  <script>
+    function closemodal()
+    {
+      $("#exampleModal").modal('hide');
+    }
+  </script>
 
 
     <!-- Navbar -->
@@ -146,33 +150,28 @@
           </div>
           
         </div>
+        <script>
+          document.querySelector('.share-button').addEventListener('click', function() {
+           if(navigator.share) {
+             navigator.share({
+               url: '{{ request.path.home }} {{ referallink }}'
+             })
+             .then(() => console.log('Share complete'))
+             .error((error) => console.error('Could not share at this time', error))
+           }
+         });
+       </script>
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
           <div class="image">
 
             <!-- <img src="{% static 'dist/img/user2-160x160.jpg' %}" class="img-circle elevation-2" alt="User Image"> -->
           </div>
           <div class="info">
-           
-            
-            
-
             Referral URL:
             <!-- <a href={{ referallink }} class="d-block">{{ request.path.home }} {{ referallink }}</a> -->
             <button class=".btn-block .btn-flat border share-button p-2 mr-2" 
             style="border-radius:5px; background:#4fd8fe">Share</button>
-          </div>
-<script>
-   document.querySelector('.share-button').addEventListener('click', function() {
-    if(navigator.share) {
-      navigator.share({
-        url: '{{ request.path.home }} {{ referallink }}'
-      })
-      .then(() => console.log('Share complete'))
-      .error((error) => console.error('Could not share at this time', error))
-    }
-  });
-</script>
-          
+          </div>     
         </div>
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
           <div class="image">
@@ -3390,10 +3389,8 @@
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Payment Gate</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
+                <h5 class="modal-title" id="exampleModalLabel">Payment GateWay</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
               </div>
               <div class="modal-body">
                 <img src="{% static 'qrcode.jpeg' %}" style="height: 80%;
@@ -3418,7 +3415,8 @@
                    
                   <!-- <label for="TRANS">Transaction id</label>
                   <input type="text" name="trans" placeholder="Transaction Id" > -->
-              </div></div>
+              </div>
+            </div>
               <div class="modal-footer">
                 <button type="submit" name = "plan" class="btn btn-secondary">Purchase</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

@@ -5,6 +5,11 @@ from FYIT import utils
 from .models import *
 from django.contrib.auth import authenticate, login, logout
 
+#flags 
+
+lelofameflag=0
+creditpurchaseflag = 0
+
 def index(request):
     return render(request,"index.html")
 
@@ -14,7 +19,14 @@ def dashboard(request):
         totalspending = utils.totalspending(username)
         username=Profile.objects.get(username = username.username)
         referlink = "/signup?referral="+str(username)
-        
+        global lelofameflag
+        if lelofameflag==1:
+            lelofameflag=0
+            return render(request,"dashboard.html",{'username':username,'spending':totalspending,"success":1,'referallink':referlink})
+        global creditpurchaseflag
+        if creditpurchaseflag==1:
+            creditpurchaseflag=0
+            return render(request,"dashboard.html",{'username':username,'spending':totalspending,"success":1,'referallink':referlink})
         return render(request,"dashboard.html",{'username':username,'spending':totalspending, 'referallink':referlink})
     else:
        return redirect('login')
@@ -126,7 +138,10 @@ def lelofamerequest(request):
         totalspending = utils.totalspending(username)
         username=Profile.objects.get(username = username.username)
         referlink = "/signup?referral="+str(username)
-        return render(request,"dashboard.html",{'username':username,'spending':totalspending,"success":1,'referallink':referlink})    
+        global lelofameflag
+        lelofameflag = 1
+        # print('lelofame', lelofameflag)
+        return redirect('dashboard/')
     return redirect('dashboard/')
 
 Price = {
@@ -145,7 +160,7 @@ Price = {
 }
 
 def creditpurchase(request):   
-    username = request.user.username
+    username = request.user.username    
     if username is None:
         return redirect('login')
     if request.method == 'POST':
@@ -161,8 +176,10 @@ def creditpurchase(request):
         obj.save()
         totalspending = utils.totalspending(username)
         username=Profile.objects.get(username = username.username)
-        return render(request,"dashboard.html",{'username':username,'spending':totalspending,"success":1})
-    return redirect('/dashboard')
+        global creditpurchaseflag
+        creditpurchaseflag = 1
+        return redirect('dashboard/')
+    return redirect('dashboard/')
     
 
 
