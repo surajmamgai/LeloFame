@@ -26,8 +26,6 @@ urlpatterns = [
     path('credit_purchase_request/',views.credit_purchase_request),
     path('lelofame_request/',views.lelofame_request),
     path('login_user/',views.login_user),
-    path('approve_c/',views.approve_c),
-    path('reject_c/',views.reject_c),
-    path('approve_l/',views.approve_l),
-    path('reject_l/',views.reject_l)
+    path('approve_c/',views.credit_a_r),
+    path('approve_l/',views.lelofame_a_r),
 ]

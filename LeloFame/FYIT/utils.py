@@ -25,7 +25,7 @@ def generate_txn():
 
 def left_credit(user,to_deduct):
     obj = Profile.objects.get(id=user)
-    total = obj.credit
+    total = obj.credits
     if(total>=to_deduct):
         return total-to_deduct
     else:
@@ -56,21 +56,24 @@ def creditpurchaselog(txn,username,amount,credit,date):
 def lelofamerequestpossible(username, credit):
     credit=int(credit)
     obj = Profile.objects.get(username = username)
-    if obj.credit<credit:
+    if obj.credits<credit:
         return False
     else:
         return True
 
 
 
-def lelofamelog(txn,username, userhandle, credit,platform, type, plan):
+def lelofamelog(txn,username, userhandle,platform, type, plan):
     obj = Profile.objects.get(username = username)
+    # credit = dic[platform][type][plan]
+    credit = 10
     if lelofamerequestpossible(username,credit)==False:
         return False
-    obj2 = LeloFameLog(txn=txn,credit_spends=credit,platform=platform,type=type,userhandle=userhandle,plan=plan,credit_left=obj.credit-credit)
-    obj.credits = obj.credit-credit
+    obj2 = LeloFameLog(txn=txn,credit_spends=credit,platform=platform,type=type,userhandle=userhandle,plan=plan,credit_left=obj.credits-credit)
+    obj.credits = obj.credits-credit
     obj2.username = obj
     obj2.save()
+    obj.save()
     return True
 
 
